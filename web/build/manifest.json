@@ -1,9 +1,13 @@
 {
   "build/app.js": "/build/app.js",
+  "build/fonts/docktrin.ttf": "/build/fonts/docktrin.ttf",
   "build/fonts/glyphicons-halflings-regular.eot": "/build/fonts/glyphicons-halflings-regular.eot",
   "build/fonts/glyphicons-halflings-regular.ttf": "/build/fonts/glyphicons-halflings-regular.ttf",
   "build/fonts/glyphicons-halflings-regular.woff": "/build/fonts/glyphicons-halflings-regular.woff",
   "build/fonts/glyphicons-halflings-regular.woff2": "/build/fonts/glyphicons-halflings-regular.woff2",
   "build/global.css": "/build/global.css",
-  "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.svg"
+  "build/images/bg.jpg": "/build/images/bg.jpg",
+  "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.svg",
+  "build/images/header-bg.jpg": "/build/images/header-bg.jpg",
+  "build/images/marketing-bg.jpg": "/build/images/marketing-bg.jpg"
 }

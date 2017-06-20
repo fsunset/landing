@@ -1,11 +1,173 @@
 // Importing Bootstrap Sass
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-body {
-  padding-top: 50px;
+$imgHomePath: '../img/home/';
 
-  .starter-template {
-      padding: 40px 15px;
-      text-align: center;
+@font-face {
+    font-family: docktrin;
+    src: url('bundles/app/fonts/docktrin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Space out content a bit */
+body {
+    color: white;
+    background-image: url($imgHomePath + 'bg.jpg');
+    background-repeat: repeat;
+    background-size: contain;
+    font-family: docktrin;
+    font-size: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .home-container {
+        padding-top: 50px;
+        position: relative;
+
+        .logo {
+            width: 250px;
+            position: absolute;
+            top: 25px;
+            left: 60px;
+        }
+    }
+
+    nav {
+        padding-right: 20px;
+
+        .nav.nav-pills {
+            height: 37px;
+            background: rgba(0, 0, 0, 0.35);
+            margin-top: 16px;
+
+            > li {
+                margin-top: -4px;
+
+                > a,
+                > a:hover,
+                > a:focus,
+                &.active > a,
+                &.active > a:hover,
+                &.active > a:focus {
+                    background-color: transparent;
+                    color: whitesmoke;
+                    padding: 10px 25px;
+                }
+            }
+        }
+    }
+
+    /* Everything gets side spacing for mobile first views */
+    .header,
+    .marketing,
+    .footer {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    /* Custom page header */
+    .header {
+        background-image: url($imgHomePath + 'header-bg.jpg');
+        background-size: contain;
+        height: 70px;
+    }
+
+    /* Custom page footer */
+    .footer {
+        padding-top: 19px;
+        color: whitesmoke;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    /* Supporting marketing content */
+    .marketing {
+        background-image: url($imgHomePath + 'marketing-bg.jpg');
+        background-repeat: repeat;
+        background-size: cover;
+        max-width: 1140px !important;
+        margin: 0;
+        padding-top: 20px;
+
+        .img-container,
+        .img-container-shadow {
+            position: relative;
+            padding: 30px 50px;
+
+            img {
+                &.combo { width: 100%; }
+
+                &.shopping-car {
+                    bottom: 10px;
+                    cursor: pointer;
+                    position: absolute;
+                    right: 10px;
+                }
+            }
+        }
+
+        .img-container { padding: 0; }
+
+        .img-container-shadow {
+            background-color: rgba(0, 0, 0, 0.35);
+
+            img.combo { width: 90%; }
+
+            &.blank {
+                background-color: transparent;
+            }
+        }
+
+
+        .title {
+            background-color: rgba(0, 0, 0, 0.35);
+            color: whitesmoke;
+            font-size: 40px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 20px 0 10px 0;
+        }
+
+        .title-md {
+            margin-top: 0px;
+            padding: 10px 0 5px;
+        }
+
+        .white-dot {
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            display: inline-block;
+            border-radius: 50%;
+            vertical-align: text-top;
+            box-shadow: white 0px 0px 8px 1px;
+        }
+    }
+
+    /* Responsive: Desktop wide and up */
+    @media screen and (min-width: 1200px) {
+        .marketing {
+            .row { margin-bottom: 30px; }
+
+            .img-container,
+            .img-container-shadow {
+                &:first-child,
+                &:nth-child(2n),
+                &:nth-child(4n),
+                &:nth-child(5n),
+                &:nth-child(7n) { margin-right: 50px; }
+            }
+        }
+    }
+
+    /* Responsive: Portrait tablets and up */
+    @media screen and (min-width: 768px) {
+        /* Remove the padding we set earlier */
+        .header,
+        .marketing,
+        .footer {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 }

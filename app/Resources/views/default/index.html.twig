@@ -1,31 +1,154 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+    <div class="container home-container">
+        <img class="logo" src="{{ asset('bundles/app/img/home/logo.png') }}" alt="Del Rodeo Logo">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Menú</a></li>
+                    <li role="presentation"><a href="#">Puntos de Venta</a></li>
+                    <li role="presentation"><a href="#">Eventos</a></li>
+                    <li role="presentation"><a href="#">Contáctenos</a></li>
                 </ul>
+            </nav>
+        </div>
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="{{ asset('bundles/app/img/home/slider1.jpg') }}" alt="Del Rodeo Slider Img">
+                </div>
+                <div class="item">
+                    <img src="{{ asset('bundles/app/img/home/slider2.jpg') }}" alt="Del Rodeo Slider Img">
+                </div>
             </div>
         </div>
-    </nav>
 
-    <div class="container">
-        <div class="starter-template">
-            <h1>Hamburguesas Del Rodeo</h1>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates consequuntur repellat culpa nostrum. Consequuntur fugiat eum, doloremque, hic sit assumenda repellat nam natus eos, obcaecati nulla perspiciatis aliquid necessitatibus fugit adipisci architecto ratione expedita dignissimos dolores fuga, odit veritatis delectus! Dicta accusantium beatae aperiam commodi id velit cum magnam, distinctio enim sit.</p>
+        <div class="row marketing">
+            <div class="col-lg-offset-1 col-lg-3 img-container">
+                <img class="combo" src="{{ asset('bundles/app/img/home/highlight1.jpg') }}" alt="Highlight 1">
+                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+            </div>
+            <div class="col-lg-3 img-container">
+                <img class="combo" src="{{ asset('bundles/app/img/home/highlight2.jpg') }}" alt="Highlight 2">
+                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+            </div>
+            <div class="col-lg-3 img-container">
+                <img class="combo" src="{{ asset('bundles/app/img/home/highlight3.jpg') }}" alt="Highlight 3">
+                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+            </div>
         </div>
+
+        <div class="row marketing">
+            <div class="title text-center">
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                menú
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="title title-md text-center">
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                hamburguesas de ¡carne, carne!
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu1.png') }}" alt="Menu 1">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu2.png') }}" alt="Menu 2">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu3.png') }}" alt="Menu 3">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu4.png') }}" alt="Menu 4">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu5.png') }}" alt="Menu 5">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu6.png') }}" alt="Menu 6">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-3 img-container-shadow blank"></div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/menu7.png') }}" alt="Menu 7">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="title text-center">
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                línea del sheriff
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/sheriff1.png') }}" alt="Sheriff 1">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/sheriff2.png') }}" alt="Sheriff 2">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/sheriff4.png') }}" alt="Sheriff 3">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-1 col-lg-3 img-container-shadow blank"></div>
+                <div class="col-lg-3 img-container-shadow">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/sheriff3.png') }}" alt="Sheriff 4">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <p>© {{ "now"|date("Y") }} hamburguesas del rodeo.</p>
+        </footer>
+
     </div>
 {% endblock %}

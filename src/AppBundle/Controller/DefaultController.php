@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Section;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,28 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $sections = $em->getRepository('AppBundle:Section')->findAll();
+
+        return $this->render('default/index.html.twig', array(
+            'sections' => $sections,
+        ));
+    }
+
+    /**
+     * @Route("/puntos-de-venta", name="puntos_venta")
+     */
+    public function puntosVentaAction(Request $request)
+    {
+        return $this->render('default/puntosVenta.html.twig');
+    }
+
+    /**
+     * @Route("/eventos", name="eventos")
+     */
+    public function eventosAction(Request $request)
+    {
+        return $this->render('default/eventos.html.twig');
     }
 }

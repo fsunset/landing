@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+        <title>{% block title %}Hamburguesas Del Rodeo - Administracion{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/globalAdmin.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+
+        {% block footer %}
+            <div class="container footer">
+                <div class="row">
+                    <div class="footer-container row text-center copyright">
+                        <div class="col-md-12">
+                            <strong>Del Rodeo Colombia</strong> · Todos los derechos reservados · &copy; {{ "now"|date("Y") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        <script src="{{ asset('build/appAdmin.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

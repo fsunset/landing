@@ -60,8 +60,7 @@ body {
 
     /* Everything gets side spacing for mobile first views */
     .header,
-    .marketing,
-    .footer {
+    .marketing  {
         padding-right: 15px;
         padding-left: 15px;
     }
@@ -73,26 +72,25 @@ body {
         height: 70px;
     }
 
-    /* Custom page footer */
-    .footer {
-        padding-top: 19px;
-        color: whitesmoke;
-        border-top: 1px solid #e5e5e5;
-    }
-
     /* Supporting marketing content */
-    .marketing {
+    .marketing,
+    .footer {
         background-image: url($imgHomePath + 'marketing-bg.jpg');
         background-repeat: repeat;
         background-size: cover;
         max-width: 1140px !important;
+
+        &.inherit-container { background-size: inherit; }
+    }
+
+    .marketing {
         margin: 0;
         padding-top: 20px;
 
         .img-container,
         .img-container-shadow {
             position: relative;
-            padding: 30px 50px;
+            padding: 15px;
 
             img {
                 &.combo { width: 100%; }
@@ -111,10 +109,24 @@ body {
         .img-container-shadow {
             background-color: rgba(0, 0, 0, 0.35);
 
-            img.combo { width: 90%; }
-
             &.blank {
                 background-color: transparent;
+            }
+
+            .item-name {
+                font-size: 33px;
+                line-height: 1;
+                height: 100px;
+                padding-top: 15px;
+            }
+
+            .item-description-price {
+                font-size: 45px;
+
+                p {
+                    line-height: 1;
+                    font-size: 24px;
+                }
             }
         }
 
@@ -125,7 +137,22 @@ body {
             font-size: 40px;
             margin-top: 50px;
             margin-bottom: 30px;
-            padding: 20px 0 10px 0;
+            padding: 0 20px;
+
+            &.menu-title {
+                font-size: 60px;
+
+                > span {
+                    width: 50%;
+                    float: left;
+                    margin-top: 5%;
+                }
+
+                .title-image {
+                    width: 45%;
+                    margin: 0 0 0 5%;
+                }
+            }
         }
 
         .title-md {
@@ -139,8 +166,41 @@ body {
             background-color: white;
             display: inline-block;
             border-radius: 50%;
-            vertical-align: text-top;
+            vertical-align: middle;
             box-shadow: white 0px 0px 8px 1px;
+        }
+
+        .panel {
+            margin-bottom: 0px;
+            background-color: transparent;
+            border: none;
+
+            a:hover,
+            a:active,
+            a:focus,
+            a:visited {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .footer {
+        color: whitesmoke;
+
+        > .row {
+            padding: 70px 11% 30px 11%;
+            background-color: rgba(0, 0, 0, 0.45);
+
+            .footer-container {
+                margin-bottom: 20px;
+
+                &:first-child { margin-bottom: 40px; }
+                &:nth-child(2n) { margin-bottom: 0px; }
+
+                .social-icons { margin-bottom: 40px; }
+
+                a { color: whitesmoke; }
+            }
         }
     }
 
@@ -164,8 +224,7 @@ body {
     @media screen and (min-width: 768px) {
         /* Remove the padding we set earlier */
         .header,
-        .marketing,
-        .footer {
+        .marketing {
             padding-right: 0;
             padding-left: 0;
         }

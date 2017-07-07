@@ -16,6 +16,61 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+
+        {% block footer %}
+            <div class="container footer">
+                <div class="row">
+                    <div class="footer-container row text-center social-icons">
+                        <div class="col-md-offset-4 col-md-1">
+                            <a href="https://www.facebook.com/DelRodeo" target="_blank">
+                                <img class="combo" src="{{ asset('bundles/app/img/global/facebook-icon.png') }}" alt="Facebook">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="https://twitter.com/Del_Rodeo" target="_blank">
+                                <img class="combo" src="{{ asset('bundles/app/img/global/twitter-icon.png') }}" alt="Twitter">
+                            </a>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="https://twitter.com/Del_Rodeo" target="_blank">
+                                <img class="combo" src="{{ asset('bundles/app/img/global/linkedin-icon.png') }}" alt="LinkedIn">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-container row">
+                        <div class="col-md-4 text-right">
+                            <a href="#">conócenos</a>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="#">terminos y condiciones</a>
+                        </div>
+                        <div class="col-md-4 text-left">
+                            <a href="#">eventos</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-container row">
+                        <div class="col-md-offset-4 col-md-1 text-right">
+                            <a href="#">menú</a>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <a href="#">faqs</a>
+                        </div>
+                        <div class="col-md-1 text-left">
+                            <a href="#">contactanos</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-container row text-center copyright">
+                        <div class="col-md-12">
+                            <strong>del rodeo colombia</strong> · todos los derechos reservados · &copy; {{ "now"|date("Y") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
         <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>

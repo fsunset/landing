@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container home-container">
+        <img class="logo" src="{{ asset('bundles/app/img/home/logo.png') }}" alt="Del Rodeo Logo">
+        <div class="header clearfix">
+            {% include 'Partials/publicNav.html.twig' %}
+        </div>
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="{{ asset('bundles/app/img/home/slider1.jpg') }}" alt="Del Rodeo Slider Img">
+                </div>
+            </div>
+        </div>
+
+        <div class="row marketing">
+            <div class="title text-center">
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                eventos
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+                <span class="white-dot"></span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

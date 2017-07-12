@@ -10,6 +10,13 @@ $imgHomePath: '../img/home/';
     font-style: normal;
 }
 
+@font-face {
+    font-family: bebas;
+    src: url('bundles/app/fonts/bebasNeue.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Space out content a bit */
 body {
     color: white;
@@ -21,7 +28,11 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 
-    .home-container {
+    /*
+    ** Events
+     */
+    .home-container,
+    .events-container {
         padding-top: 50px;
         position: relative;
 
@@ -121,11 +132,12 @@ body {
             }
 
             .item-description-price {
+                font-family: bebas;
                 font-size: 45px;
 
                 p {
-                    line-height: 1;
                     font-size: 24px;
+                    line-height: 1;
                 }
             }
         }
@@ -135,22 +147,30 @@ body {
             background-color: rgba(0, 0, 0, 0.35);
             color: whitesmoke;
             font-size: 40px;
-            margin-top: 50px;
+            margin-top: 30px;
             margin-bottom: 30px;
-            padding: 0 20px;
+            padding: 30px 20px 20px;
 
             &.menu-title {
-                font-size: 60px;
+                font-size: 37px;
+                position: relative;
+                overflow: hidden;
+                padding: 0 20px;
 
                 > span {
+                    text-align: center;
                     width: 50%;
                     float: left;
-                    margin-top: 5%;
+                    margin-top: 6%;
+
+                    .white-dot { margin-top: -20px; }
                 }
 
                 .title-image {
-                    width: 45%;
+                    height: 162px;
                     margin: 0 0 0 5%;
+                    right: 0;
+                    position: absolute;
                 }
             }
         }
@@ -171,7 +191,7 @@ body {
         }
 
         .panel {
-            margin-bottom: 0px;
+            margin-bottom: -20px;
             background-color: transparent;
             border: none;
 
@@ -181,6 +201,15 @@ body {
             a:visited {
                 text-decoration: none;
             }
+        }
+    }
+
+    /*
+    ** Events
+     */
+    .events-container {
+        .marketing.boxes {
+            padding-bottom: 40px;
         }
     }
 

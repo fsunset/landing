@@ -15,7 +15,7 @@ class SectionType extends AbstractType
     {
         $builder->add('name');
     }
-    
+
     /**
      * {@inheritdoc}
      */

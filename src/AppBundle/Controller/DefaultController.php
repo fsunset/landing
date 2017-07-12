@@ -16,10 +16,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sections = $em->getRepository('AppBundle:Section')->findAll();
+        $featuredItems = $em->getRepository('AppBundle:Item')->findBy(array('isFeatured' => true));
+        $sections = $em->getRepository('AppBundle:Section')->findAll(array(), array('order' => 'ASC'));
 
         return $this->render('default/index.html.twig', array(
-            'sections' => $sections,
+            'featuredItems' => $featuredItems,
+            'sections' => $sections
         ));
     }
 

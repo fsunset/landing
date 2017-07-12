@@ -23,7 +23,7 @@ class AppExtension extends \Twig_Extension
     public function menuItemFilter($sectionId, $counter = false)
     {
         $em = $this->doctrine->getManager();
-        $items = $em->getRepository('AppBundle:Item')->findBy(array('section' => $sectionId));
+        $items = $em->getRepository('AppBundle:Item')->findBy(array('section' => $sectionId, 'isFeatured' => false));
 
         if (!$counter) {
             return $items;

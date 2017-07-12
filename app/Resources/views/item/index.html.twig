@@ -1,7 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Items list</h1>
+    <h1>Items list ({{ items|length }} total)</h1>
 
     <table>
         <thead>
@@ -9,11 +9,11 @@
                 <th>Id</th>
                 <th>Code</th>
                 <th>Name</th>
-                <th>Unitaryprice</th>
-                <th>Comboprice</th>
-                <th>Isfeatured</th>
+                <th>Unitary Price</th>
+                <th>Combo Price</th>
+                <th>Is Featured</th>
                 <th>Createdat</th>
-                <th>Isactive</th>
+                <th>Is Active</th>
                 <th>Actions</th>
             </tr>
         </thead>

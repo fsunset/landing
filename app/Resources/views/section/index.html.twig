@@ -1,13 +1,15 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Sections list</h1>
+    <h1>Sections list ({{ sections|length }} total)</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Order</th>
                 <th>Name</th>
+                <th>Number of Items</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,7 +17,9 @@
         {% for section in sections %}
             <tr>
                 <td><a href="{{ path('section_show', { 'id': section.id }) }}">{{ section.id }}</a></td>
+                <td>{{ section.order }}</td>
                 <td>{{ section.name }}</td>
+                <td style="text-align:center;">{{ section.id|menuItem(true) }}</td>
                 <td>
                     <ul>
                         <li>

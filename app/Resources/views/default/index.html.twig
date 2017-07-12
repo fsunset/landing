@@ -38,18 +38,12 @@
         </div>
 
         <div class="row marketing">
-            <div class="col-lg-offset-1 col-lg-3 img-container">
-                <img class="combo" src="{{ asset('bundles/app/img/home/highlight1.jpg') }}" alt="Highlight 1">
-                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
-            </div>
-            <div class="col-lg-3 img-container">
-                <img class="combo" src="{{ asset('bundles/app/img/home/highlight2.jpg') }}" alt="Highlight 2">
-                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
-            </div>
-            <div class="col-lg-3 img-container">
-                <img class="combo" src="{{ asset('bundles/app/img/home/highlight3.jpg') }}" alt="Highlight 3">
-                <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
-            </div>
+            {% for featuredItem in featuredItems %}
+                <div class="{% if loop.first %}col-lg-offset-1 {% endif %}col-lg-3 img-container">
+                    <img class="combo" src="{{ asset('bundles/app/img/home/featured' ~ loop.index ~ '.jpg') }}" alt="{{ featuredItem.name|title }} ">
+                    <img class="shopping-car" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                </div>
+            {% endfor %}
         </div>
 
         <div id="menu" class="row marketing">
@@ -74,8 +68,10 @@
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{'collapse' ~ loop.index }}" aria-expanded="false" aria-controls="{{'collapse' ~ loop.index }}">
                                         <div class="title menu-title clearfix">
                                             <span>
-                                                <span class="white-dot"></span>
                                                 {{ section.name|lower }}
+                                                <br>
+                                                <span class="white-dot"></span>
+                                                <span class="white-dot"></span>
                                                 <span class="white-dot"></span>
                                             </span>
 

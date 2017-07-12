@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 class ItemType extends AbstractType
 {
@@ -15,7 +17,9 @@ class ItemType extends AbstractType
     {
         $builder
             ->add('code')
+            ->add('order')
             ->add('name')
+            ->add('description', TextareaType::class)
             ->add('unitaryPrice')
             ->add('comboPrice')
             ->add('isFeatured')

@@ -1,6 +1,7 @@
 // Importing Bootstrap Sass
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
+$imgGlobalPath: '../img/global/';
 $imgHomePath: '../img/home/';
 $transparentBlack: rgba(0, 0, 0, 0.35);
 
@@ -79,7 +80,7 @@ body {
 
     /* Custom page header */
     .header {
-        background-image: url($imgHomePath + 'header-bg.jpg');
+        background-image: url($imgGlobalPath + 'header-bg.jpg');
         background-size: contain;
         height: 70px;
     }
@@ -87,7 +88,7 @@ body {
     /* Supporting marketing content */
     .marketing,
     .footer {
-        background-image: url($imgHomePath + 'marketing-bg.jpg');
+        background-image: url($imgGlobalPath + 'marketing-bg.jpg');
         background-repeat: repeat;
         background-size: cover;
         max-width: 1140px !important;

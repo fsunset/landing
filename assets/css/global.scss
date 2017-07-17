@@ -2,6 +2,7 @@
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 $imgHomePath: '../img/home/';
+$transparentBlack: rgba(0, 0, 0, 0.35);
 
 @font-face {
     font-family: docktrin;
@@ -49,7 +50,7 @@ body {
 
         .nav.nav-pills {
             height: 37px;
-            background: rgba(0, 0, 0, 0.35);
+            background: $transparentBlack;
             margin-top: 16px;
 
             > li {
@@ -111,6 +112,7 @@ body {
                     cursor: pointer;
                     position: absolute;
                     right: 10px;
+                    width: 50px;
                 }
             }
         }
@@ -118,25 +120,30 @@ body {
         .img-container { padding: 0; }
 
         .img-container-shadow {
-            background-color: rgba(0, 0, 0, 0.35);
+            background-color: $transparentBlack;
 
             &.blank {
                 background-color: transparent;
             }
 
             .item-name {
-                font-size: 33px;
-                line-height: 1;
-                height: 100px;
-                padding-top: 15px;
+                font-size: 30px;
+                line-height: .9;
+                height: 95px;
+                position: relative;
+                padding: 0;
+                display: flex;
+                align-items: center;
+
+                h3 { margin: 0; }
             }
 
             .item-description-price {
                 font-family: bebas;
-                font-size: 45px;
+                font-size: 35px;
 
                 p {
-                    font-size: 24px;
+                    font-size: 22px;
                     line-height: 1;
                 }
             }
@@ -144,7 +151,7 @@ body {
 
 
         .title {
-            background-color: rgba(0, 0, 0, 0.35);
+            background-color: $transparentBlack;
             color: whitesmoke;
             font-size: 40px;
             margin-top: 30px;
@@ -152,22 +159,29 @@ body {
             padding: 30px 20px 20px;
 
             &.menu-title {
-                font-size: 37px;
                 position: relative;
-                overflow: hidden;
                 padding: 0 20px;
+                height: 150px;
+                display: flex;
+                align-items: center;
 
                 > span {
                     text-align: center;
                     width: 50%;
                     float: left;
-                    margin-top: 6%;
+                    height: 60px;
 
-                    .white-dot { margin-top: -20px; }
+                    h2 {
+                        margin: 0;
+                        font-size: 37px;
+                        line-height: .85;
+                    }
+
+                    .white-dot { margin-top: -10px; }
                 }
 
                 .title-image {
-                    height: 162px;
+                    max-width: 350px;
                     margin: 0 0 0 5%;
                     right: 0;
                     position: absolute;
@@ -191,7 +205,8 @@ body {
         }
 
         .panel {
-            margin-bottom: -20px;
+            width: 70%;
+            margin: 0 auto -20px;
             background-color: transparent;
             border: none;
 
@@ -200,6 +215,25 @@ body {
             a:focus,
             a:visited {
                 text-decoration: none;
+            }
+
+            &:nth-child(even) {
+                .menu-title {
+                    > span {
+                        position: absolute;
+                        right: 0;
+                    }
+
+                    .title-image {
+                        left: 0;
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            .marketing {
+                background: none;
+                padding-top: 0;
             }
         }
     }
@@ -211,8 +245,39 @@ body {
         .marketing.boxes {
             padding-bottom: 40px;
         }
+
+        .boxes {
+            padding-right: 20px;
+        }
     }
 
+    .box {
+        font-family: bebas;
+        background: $transparentBlack;
+        padding-top: 20px;
+
+        &.form { margin-bottom: 40px; }
+    }
+
+    .map { margin-left: 30px; }
+
+
+    /*
+    ** Footer
+     */
+    .contact-form {
+        width: 60%;
+        margin: 0 auto;
+        input, a {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+
+    /*
+    ** Footer
+     */
     .footer {
         color: whitesmoke;
 

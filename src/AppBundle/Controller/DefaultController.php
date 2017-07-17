@@ -30,7 +30,13 @@ class DefaultController extends Controller
      */
     public function puntosVentaAction(Request $request)
     {
-        return $this->render('default/puntosVenta.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $branches = $em->getRepository('AppBundle:Branch')->findAll();
+
+        return $this->render('default/puntosVenta.html.twig', array(
+            'branches' => $branches
+        ));
     }
 
     /**
@@ -39,5 +45,13 @@ class DefaultController extends Controller
     public function eventosAction(Request $request)
     {
         return $this->render('default/eventos.html.twig');
+    }
+
+    /**
+     * @Route("/contacto", name="contacto")
+     */
+    public function contactoAction(Request $request)
+    {
+        return $this->render('default/contacto.html.twig');
     }
 }

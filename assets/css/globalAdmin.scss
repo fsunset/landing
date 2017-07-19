@@ -1,0 +1,79 @@
+// Importing Bootstrap Sass
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+$imgGlobalPath: '../img/global/';
+$imgHomePath: '../img/home/';
+$transparentBlack: rgba(0, 0, 0, 0.35);
+
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .header {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .header {
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .header h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+    }
+
+    .title-container {
+        position: relative;
+        margin: 20px 0px;
+
+        h1 {
+            margin: 0;
+        }
+
+        .btn {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    .list-container,
+    .form-container,
+    .btn-container,
+    .edit-container {
+        margin-bottom: 40px;
+    }
+
+    .form-container,
+    .show-container,
+    .edit-container {
+        width: 700px;
+    }
+
+    .btn-container {
+        margin-top: 30px;
+
+        a {
+            float: left;
+            margin-right: 10px;
+        }
+    }
+
+    .copyright {
+        font-size: 20px;
+    }
+
+    @media screen and (min-width: 768px) {
+        .header {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+    }
+}

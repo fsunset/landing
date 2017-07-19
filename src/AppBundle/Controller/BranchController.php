@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Branch controller.
  *
- * @Route("branch")
+ * @Route("admin/branch")
  */
 class BranchController extends Controller
 {

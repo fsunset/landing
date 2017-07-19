@@ -1,51 +1,52 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Items list ({{ items|length }} total)</h1>
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Productos ({{ items|length }} total)</h1>
+            <a href="{{ path('item_new') }}" class="btn btn-primary">Nuevo Producto</a>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Unitary Price</th>
-                <th>Combo Price</th>
-                <th>Is Featured</th>
-                <th>Createdat</th>
-                <th>Is Active</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in items %}
-            <tr>
-                <td><a href="{{ path('item_show', { 'id': item.id }) }}">{{ item.id }}</a></td>
-                <td>{{ item.code }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.unitaryPrice }}</td>
-                <td>{{ item.comboPrice }}</td>
-                <td>{% if item.isFeatured %}Yes{% else %}No{% endif %}</td>
-                <td>{% if item.createdAt %}{{ item.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if item.isActive %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('item_show', { 'id': item.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('item_edit', { 'id': item.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('item_new') }}">Create a new item</a>
-        </li>
-    </ul>
+        <div class="row container list-container">
+            <table id="itemTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio Unitario</th>
+                        <th>Precio en Combo</th>
+                        <th>Destacado</th>
+                        <th>Creado</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td><a href="{{ path('item_show', { 'id': item.id }) }}">{{ item.id }}</a></td>
+                        <td>{{ item.code }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.unitaryPrice }}</td>
+                        <td>{{ item.comboPrice }}</td>
+                        <td>{% if item.isFeatured %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if item.createdAt %}{{ item.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if item.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('item_show', { 'id': item.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('item_edit', { 'id': item.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

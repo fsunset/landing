@@ -1,5 +1,6 @@
 {
   "build/app.js": "/build/app.js",
+  "build/dataTables.css": "/build/dataTables.css",
   "build/fonts/bebasNeue.ttf": "/build/fonts/bebasNeue.ttf",
   "build/fonts/docktrin.ttf": "/build/fonts/docktrin.ttf",
   "build/fonts/glyphicons-halflings-regular.eot": "/build/fonts/glyphicons-halflings-regular.eot",
@@ -7,8 +8,14 @@
   "build/fonts/glyphicons-halflings-regular.woff": "/build/fonts/glyphicons-halflings-regular.woff",
   "build/fonts/glyphicons-halflings-regular.woff2": "/build/fonts/glyphicons-halflings-regular.woff2",
   "build/global.css": "/build/global.css",
+  "build/globalAdmin.css": "/build/globalAdmin.css",
   "build/images/bg.jpg": "/build/images/bg.jpg",
   "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.svg",
   "build/images/header-bg.jpg": "/build/images/header-bg.jpg",
-  "build/images/marketing-bg.jpg": "/build/images/marketing-bg.jpg"
+  "build/images/marketing-bg.jpg": "/build/images/marketing-bg.jpg",
+  "build/images/sort_asc.png": "/build/images/sort_asc.png",
+  "build/images/sort_asc_disabled.png": "/build/images/sort_asc_disabled.png",
+  "build/images/sort_both.png": "/build/images/sort_both.png",
+  "build/images/sort_desc.png": "/build/images/sort_desc.png",
+  "build/images/sort_desc_disabled.png": "/build/images/sort_desc_disabled.png"
 }

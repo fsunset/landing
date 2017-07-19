@@ -5,16 +5,33 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
         <title>{% block title %}Hamburguesas Del Rodeo - Administracion{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/globalAdmin.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/dataTables.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
+        <div class="container">
+            <div class="header clearfix">
+                {% set route = app.request.attributes.get('_route')|split('_') %}
+
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li class="{% if route[0] == 'section' %}active{% endif %}"><a href="{{path('section_index')}}">Secciones</a></li>
+                        <li class="{% if route[0] == 'item' %}active{% endif %}"><a href="{{path('item_index')}}">Productos</a></li>
+                        <li class="{% if route[0] == 'branch' %}active{% endif %}"><a href="{{path('branch_index')}}">Sucursales</a></li>
+                        <li><a href="{{path('homepage')}}">Sitio Público</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Del Rodeo Admin</h3>
+            </div>
+        </div>
+
         {% block body %}{% endblock %}
 
         {% block footer %}
@@ -29,7 +46,7 @@
             </div>
         {% endblock %}
 
-        <script src="{{ asset('build/appAdmin.js') }}"></script>
+        <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

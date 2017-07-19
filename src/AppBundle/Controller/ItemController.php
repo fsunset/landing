@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Item controller.
  *
- * @Route("item")
+ * @Route("admin/item")
  */
 class ItemController extends Controller
 {

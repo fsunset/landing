@@ -14,8 +14,12 @@ Encore
     // will output as web/build/app.js
     .addEntry('app', './assets/js/main.js')
 
+    // will output as web/build/globalAdmin.css
+    .addStyleEntry('globalAdmin', './assets/css/globalAdmin.scss')
     // will output as web/build/global.css
     .addStyleEntry('global', './assets/css/global.scss')
+    // will output as web/build/dataTables.css
+    .addStyleEntry('dataTables', './assets/css/jquery.dataTables.min.css')
 
     // allow sass/scss files to be processed
     .enableSassLoader()

@@ -1,43 +1,42 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Sections list ({{ sections|length }} total)</h1>
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Secciones ({{ sections|length }} total)</h1>
+            <a href="{{ path('section_new') }}" class="btn btn-primary">Nueva Seccion</a>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Order</th>
-                <th>Name</th>
-                <th>Number of Items</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for section in sections %}
-            <tr>
-                <td><a href="{{ path('section_show', { 'id': section.id }) }}">{{ section.id }}</a></td>
-                <td>{{ section.order }}</td>
-                <td>{{ section.name }}</td>
-                <td style="text-align:center;">{{ section.id|menuItem(true) }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('section_show', { 'id': section.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('section_edit', { 'id': section.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('section_new') }}">Create a new section</a>
-        </li>
-    </ul>
+        <div class="row container list-container">
+            <table id="sectionTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th width="20">Id</th>
+                        <th>Nombre</th>
+                        <th>Numero de Productos</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for section in sections %}
+                    <tr>
+                        <td><a href="{{ path('section_show', { 'id': section.id }) }}">{{ section.id }}</a></td>
+                        <td>{{ section.name }}</td>
+                        <td style="text-align:center;">{{ section.id|menuItem(true) }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('section_show', { 'id': section.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('section_edit', { 'id': section.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

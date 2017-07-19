@@ -1,21 +1,15 @@
 {% extends 'baseAdmin.html.twig' %}
 
+{% form_theme edit_form 'form/bootstrap_3_layout.html.twig' %}
+
 {% block body %}
-    <h1>Item edit</h1>
+    <div class="container edit-container">
+        <h1>Editar Producto</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+        {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Editar" class="btn btn-primary"/>
+        {{ form_end(edit_form) }}
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('item_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

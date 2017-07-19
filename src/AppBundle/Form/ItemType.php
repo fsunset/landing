@@ -16,16 +16,30 @@ class ItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code')
-            ->add('order')
-            ->add('name')
-            ->add('description', TextareaType::class)
-            ->add('unitaryPrice')
-            ->add('comboPrice')
-            ->add('isFeatured')
-            ->add('isActive')
+            ->add('code', null, array(
+                'label_format' => 'Código',
+            ))
+            ->add('name', null, array(
+                'label_format' => 'Nombre',
+            ))
+            ->add('description', TextareaType::class, array(
+                'label_format' => 'Descripcion',
+            ))
+            ->add('unitaryPrice', null, array(
+                'label_format' => 'Precio Unitario',
+            ))
+            ->add('comboPrice', null, array(
+                'label_format' => 'Precio Combo',
+            ))
+            ->add('isFeatured', null, array(
+                'label_format' => 'Destacado',
+            ))
+            ->add('isActive', null, array(
+                'label_format' => 'Activo',
+            ))
             ->add('section', null, array(
-                'required'   => true
+                'required'   => true,
+                'label_format' => 'Sección',
                 ));
     }
 

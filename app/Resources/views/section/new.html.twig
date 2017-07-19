@@ -1,16 +1,14 @@
 {% extends 'baseAdmin.html.twig' %}
 
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
+
 {% block body %}
-    <h1>Section creation</h1>
+    <div class="container form-container">
+        <h1>Nueva Sección</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('section_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Crear Sección" class="btn btn-primary"/>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

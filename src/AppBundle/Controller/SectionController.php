@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Section controller.
  *
- * @Route("section")
+ * @Route("admin/section")
  */
 class SectionController extends Controller
 {

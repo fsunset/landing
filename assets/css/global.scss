@@ -22,9 +22,8 @@ $transparentBlack: rgba(0, 0, 0, 0.35);
 /* Space out content a bit */
 body {
     color: white;
-    background-image: url($imgHomePath + 'bg.jpg');
+    background-image: url($imgGlobalPath + 'bg.jpg');
     background-repeat: repeat;
-    background-size: contain;
     font-family: docktrin;
     font-size: 25px;
     padding-top: 20px;
@@ -39,10 +38,10 @@ body {
         position: relative;
 
         .logo {
-            width: 250px;
+            width: 280px;
             position: absolute;
-            top: 25px;
-            left: 60px;
+            top: 2px;
+            left: 30px;
         }
     }
 
@@ -83,6 +82,7 @@ body {
         background-image: url($imgGlobalPath + 'header-bg.jpg');
         background-size: contain;
         height: 70px;
+        font-size: .88em;
     }
 
     /* Supporting marketing content */
@@ -91,12 +91,16 @@ body {
         background-image: url($imgGlobalPath + 'marketing-bg.jpg');
         background-repeat: repeat;
         background-size: cover;
-        max-width: 1140px !important;
+        max-width: 1020px !important;
 
-        &.inherit-container { background-size: inherit; }
+        &.inherit-container { background-size: contain; }
     }
 
     .marketing {
+        img {
+            max-width: 100%;
+        }
+
         margin: 0;
         padding-top: 20px;
 
@@ -113,7 +117,7 @@ body {
                     cursor: pointer;
                     position: absolute;
                     right: 10px;
-                    width: 50px;
+                    width: 35px;
                 }
             }
         }
@@ -128,23 +132,26 @@ body {
             }
 
             .item-name {
-                font-size: 30px;
                 line-height: .9;
-                height: 95px;
+                height: 90px;
                 position: relative;
                 padding: 0;
                 display: flex;
                 align-items: center;
 
-                h3 { margin: 0; }
+                h3 {
+                    margin: 0;
+                    font-size: .85em;
+                    width: 100%;
+                }
             }
 
             .item-description-price {
                 font-family: bebas;
-                font-size: 35px;
+                font-size: 1.2em;
 
                 p {
-                    font-size: 22px;
+                    font-size: .55em;
                     line-height: 1;
                 }
             }
@@ -154,7 +161,7 @@ body {
         .title {
             background-color: $transparentBlack;
             color: whitesmoke;
-            font-size: 40px;
+            font-size: 1.1em;
             margin-top: 30px;
             margin-bottom: 30px;
             padding: 30px 20px 20px;
@@ -174,7 +181,7 @@ body {
 
                     h2 {
                         margin: 0;
-                        font-size: 37px;
+                        font-size: .85em;
                         line-height: .85;
                     }
 
@@ -196,8 +203,8 @@ body {
         }
 
         .white-dot {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background-color: white;
             display: inline-block;
             border-radius: 50%;
@@ -262,6 +269,21 @@ body {
 
     .map { margin-left: 30px; }
 
+    /*
+    ** Shopping Modal
+     */
+    .modal {
+        .modal-content {
+            background-image: url($imgGlobalPath + 'modal-bg.jpg');
+            background-size: contain;
+            color: black;
+            font-family: bebas;
+
+            .modal-body img {
+                width: 60%;
+            }
+        }
+    }
 
     /*
     ** Footer
@@ -281,6 +303,7 @@ body {
      */
     .footer {
         color: whitesmoke;
+        font-size: .7em;
 
         > .row {
             padding: 70px 11% 30px 11%;
@@ -312,6 +335,10 @@ body {
                 &:nth-child(5n),
                 &:nth-child(7n) { margin-right: 50px; }
             }
+        }
+
+        .container {
+            width: 1050px;
         }
     }
 

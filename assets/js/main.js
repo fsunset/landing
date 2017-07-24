@@ -178,7 +178,51 @@ _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPagi
 _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
 
 
-// Initialize All DataTables
+
 $(document).ready(function() {
+    // Initialize All DataTables
     $('.dataTable').DataTable();
+
+    // set info for shopping modal
+    $('#shoppingModal').on('show.bs.modal', function(e) {
+        var $button = $(e.relatedTarget),
+            title = $button.data('title'),
+            id = $button.data('id'),
+            $shoppingModal = $(this),
+            $shoppingModalDesc = $('#shoppingModalDesc'),
+            $totalPrice = $('#totalPrice'),
+            totalPrice = 0;
+
+        $shoppingModal.find('.modal-title').text(title);
+
+        $.ajax({
+            url: $shoppingModal.data('url'),
+            method: 'post',
+            data: {'id': id},
+            type: 'json',
+            success: function(data) {
+                $shoppingModalDesc.html('<p>' + data.description + '</p>');
+                if (data.unitaryPrice > 0 ) {
+                    totalPrice = data.unitaryPrice;
+                } else {
+                    totalPrice = data.comboPrice;
+                }
+                $totalPrice.text('$' + totalPrice);
+            },
+            error: function(error) {
+                console.log("An unhandled error occurred in ajax success callback: " + error);
+            }
+        });
+    });
+
+    // Update total price in shopping modal
+    $('.shopping-checkbox').mousedown(function() {
+        var $this = $(this);
+
+        if ($this.is(':checked')) {
+            console.log($this.siblings().text());
+        } else {
+            console.log($this.siblings().text());
+        }
+    });
 });

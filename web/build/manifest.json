@@ -17,5 +17,6 @@
   "build/images/sort_asc_disabled.png": "/build/images/sort_asc_disabled.png",
   "build/images/sort_both.png": "/build/images/sort_both.png",
   "build/images/sort_desc.png": "/build/images/sort_desc.png",
-  "build/images/sort_desc_disabled.png": "/build/images/sort_desc_disabled.png"
+  "build/images/sort_desc_disabled.png": "/build/images/sort_desc_disabled.png",
+  "build/images/modal-bg.jpg": "/build/images/modal-bg.jpg"
 }

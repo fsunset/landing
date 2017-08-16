@@ -26,38 +26,38 @@
                 <span class="white-dot"></span>
             </div>
 
-            <div class="row">
-                <div id="myMap" class="col-lg-5 map"></div>
+            <div class="row container" style="padding:50px;">
+                {# <div id="myMap" class="col-lg-5 map"></div> #}
                 {% for branch in branches %}
-                    <div class="col-lg-6 box">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <img src="http://via.placeholder.com/400x400" alt="Image" class="img-thumbnail">
+                    {# <div class="col-sm-6 box"> #}
+                        <div class="row box sales-box">
+                            <div class="col-sm-6">
+                                <img src="http://via.placeholder.com/400x200" alt="Image" class="img-thumbnail">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-sm-6">
                                 <h3>{{ branch.name|title }}</h3>
                                 <p>{{ branch.address }}</p>
                                 <p>{{ branch.phone }}</p>
                                 <p>{{ branch.hours }}</p>
                             </div>
                         </div>
-                    </div>
+                    {# </div> #}
                 {% endfor %}
             </div>
         </div>
 
         <script>
-            var x = document.getElementById("myMap");
+            // var x = document.getElementById("myMap");
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(showPosition);
+            // } else {
+            //     x.innerHTML = "Geolocation is not supported by this browser.";
+            // }
 
-            function showPosition(position) {
-                x.innerHTML = '<iframe width="100%" height="300" frameborder="0" style="border:0" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=hamburguesas+del+rodeo&center='+position.coords.latitude+', '+position.coords.longitude+'&zoom=15&key=AIzaSyBTuuF0qjvaOOT0Nj9MCq9SRsK1h8miy5o&language=es"></iframe>';
-            }
+            // function showPosition(position) {
+            //     x.innerHTML = '<iframe width="100%" height="300" frameborder="0" style="border:0" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=hamburguesas+del+rodeo&center='+position.coords.latitude+', '+position.coords.longitude+'&zoom=15&key=AIzaSyBTuuF0qjvaOOT0Nj9MCq9SRsK1h8miy5o&language=es"></iframe>';
+            // }
         </script>
 
     </div>

@@ -201,7 +201,7 @@ $(document).ready(function() {
             data: {'id': id},
             type: 'json',
             success: function(data) {
-                $shoppingModalDesc.html('<p>' + data.description + '</p>');
+                $shoppingModalDesc.html(data.description);
                 if (data.unitaryPrice > 0 ) {
                     totalPrice = data.unitaryPrice;
                 } else {

@@ -29,6 +29,16 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 
+    .domi {
+        width: 250px;
+        float: right;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
     /*
     ** Events
      */
@@ -161,8 +171,7 @@ body {
     }
 
     /* Supporting marketing content */
-    .marketing,
-    .footer {
+    .marketing {
         background-image: url($imgGlobalPath + 'marketing-bg.jpg');
         background-repeat: repeat;
         background-size: cover;
@@ -428,23 +437,58 @@ body {
     .map { margin-left: 30px; }
 
     /*
-    ** Shopping Modal
+    ** Footer
      */
-    .modal {
-        .modal-content {
-            background-image: url($imgGlobalPath + 'modal-bg.jpg');
-            background-size: contain;
-            color: black;
-            font-family: bebas;
+    .footer {
+        background-image: url($imgGlobalPath + 'footer-bg.jpg');
+        color: #432b1c;
+        font-size: .5em;
+        @media screen and (min-width: 376px) {
+            font-size: .7em;
+        }
+        font-family: bebas;
+        padding: 20px 50px;
+        max-width: 1020px !important;
+        @media screen and (min-width: 769px) and (max-width: 1199px) {
+            width: 940px;
+        }
+        @media screen and (min-width: 741px) and (max-width: 768px) {
+            width: 720px;
+        }
+        @media screen and (max-width: 740px) {
+            margin: 0 15px;
+        }
 
-            .modal-body img {
-                width: 60%;
+        h4 { margin-bottom: 25px; }
+
+        ul {
+            li {
+                margin: 10px 0;
+
+                a {
+                    color: #432b1c;
+
+                    span { vertical-align: sub; }
+                }
+            }
+        }
+
+        img {
+            float: left;
+            margin-right: 10px;
+            @media screen and (min-width: 769px) { margin-left: 3em; }
+            width: 25px;
+        }
+
+        .copyright {
+            @media screen and (min-width: 1200px) {
+                margin-top: 85px;
             }
         }
     }
 
     /*
-    ** Footer
+    ** Contact Form
      */
     .contact-form {
         width: 60%;
@@ -457,35 +501,56 @@ body {
     }
 
     /*
-    ** Footer
+    ** Shopping Modal
      */
-    .footer {
-        color: whitesmoke;
-        font-size: .7em;
-        @media screen and (min-width: 769px) and (max-width: 1199px) {
-            width: 940px;
-        }
-        @media screen and (min-width: 741px) and (max-width: 768px) {
-            width: 720px;
-        }
-        @media screen and (max-width: 740px) {
-            margin: 0 15px;
-        }
+    .modal {
+        .modal-content {
+            background-image: url($imgGlobalPath + 'modal-bg.jpg');
+            background-size: contain;
+            color: #432b1c;
+            font-family: bebas;
 
-        > .row {
-            padding: 70px 11% 30px 11%;
-            background-color: rgba(0, 0, 0, 0.45);
+            .modal-header {
+                background-image: url($imgHomePath + 'madera.png');
+                height: 300px;
+                background-repeat: no-repeat;
+                background-position: bottom;
+                background-size: contain;
 
-            .footer-container {
-                margin-bottom: 20px;
-
-                &:first-child { margin-bottom: 40px; }
-                &:nth-child(2n) { margin-bottom: 0px; }
-
-                .social-icons { margin-bottom: 40px; }
-
-                a { color: whitesmoke; }
+                img {
+                    width: 60%;
+                    margin-left: 20%;
+                }
             }
+
+            .modal-body {
+                font-size: .8em;
+            }
+
+            .item-description-price {
+                font-size: .8em;
+                text-align: center;
+            }
+
+            select { font-size: 17px; }
+            small { font-size: 14px; }
+            h3 { margin-bottom: 0; }
+            ul {
+                margin-top: 15px;
+
+                li {
+                    width: 45%;
+                    float: left;
+                    margin-right: 5%;
+
+                    span {
+                        vertical-align: text-top;
+                        font-size: 17px;
+                    }
+                }
+            }
+
+            .adds { margin-top: 20px; }
         }
     }
 

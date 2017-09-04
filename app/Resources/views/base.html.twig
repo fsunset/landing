@@ -15,57 +15,60 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <div class="container">
+            <img class="domi" src="{{ asset('bundles/app/img/global/domicilio.png') }}" alt="domicilios">
+        </div>
         {% block body %}{% endblock %}
 
         {% block footer %}
             <div class="container footer">
-                <div class="row">
-                    <div class="footer-container row text-center social-icons">
-                        <div class="col-md-offset-4 col-md-1">
-                            <a href="https://www.facebook.com/DelRodeo" target="_blank">
+                <div class="row text-center">
+                    <div class="col-xs-3">
+                        <h4>Social</h4>
+                        <ul class="text-left">
+                            <li>
+                                <a href="https://www.facebook.com/DelRodeo" target="_blank" class="clearfix">
                                 <img class="combo" src="{{ asset('bundles/app/img/global/facebook-icon.png') }}" alt="Facebook">
+                                <span>Facebook</span>
                             </a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="https://twitter.com/Del_Rodeo" target="_blank">
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Del_Rodeo" target="_blank" class="clearfix">
                                 <img class="combo" src="{{ asset('bundles/app/img/global/twitter-icon.png') }}" alt="Twitter">
+                                <span>Twitter</span>
                             </a>
-                        </div>
-                        <div class="col-md-1">
-                            <a href="https://twitter.com/Del_Rodeo" target="_blank">
-                                <img class="combo" src="{{ asset('bundles/app/img/global/linkedin-icon.png') }}" alt="LinkedIn">
+                            </li>
+                            <li>
+                                <a href="https://instagram.com/del_rodeo" target="_blank" class="clearfix">
+                                <img class="combo" src="{{ asset('bundles/app/img/global/instagram-icon.png') }}" alt="LinkedIn">
+                                <span>Instagram</span>
                             </a>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="footer-container row">
-                        <div class="col-md-4 text-right">
-                            <a href="#">conócenos</a>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <a href="#">terminos y condiciones</a>
-                        </div>
-                        <div class="col-md-4 text-left">
-                            <a href="#">eventos</a>
-                        </div>
+                    <div class="col-xs-3">
+                        <h4>Categorías</h4>
+                        <ul>
+                            <li><a href="{{path('puntos_venta')}}">Puntos de Venta</a></li>
+                            <li><a href="{{path('contacto')}}">Contáctenos</a></li>
+                            <li><a href="{{path('eventos')}}">Eventos</a></li>
+                        </ul>
                     </div>
-
-                    <div class="footer-container row">
-                        <div class="col-md-offset-4 col-md-1 text-right">
-                            <a href="#">menú</a>
-                        </div>
-                        <div class="col-md-1 text-center">
-                            <a href="#">faqs</a>
-                        </div>
-                        <div class="col-md-1 text-left">
-                            <a href="#">contactanos</a>
-                        </div>
+                    <div class="col-xs-3">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="">Preguntas frecuentes</a></li>
+                            <li><a href=""></a>Politica de privacidad</li>
+                            <li><a href=""></a>Condiciones de uso</li>
+                        </ul>
                     </div>
-
-                    <div class="footer-container row text-center copyright">
-                        <div class="col-md-12">
-                            <strong>del rodeo colombia</strong> · todos los derechos reservados · &copy; {{ "now"|date("Y") }}
-                        </div>
+                    <div class="col-xs-3">
+                        <ul class="copyright">
+                            <li><a href=""></a>Condiciones y restricciones</li>
+                            <li>
+                                <strong>del rodeo colombia</strong> &copy; {{ "now"|date("Y") }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

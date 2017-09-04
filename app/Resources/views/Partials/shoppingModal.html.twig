@@ -1,0 +1,63 @@
+<div class="modal fade shopping-modal" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="shoppingModalLabel" data-url="{{ path('itemInfo') }}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="{{ asset('bundles/app/img/home/menu.png') }}" alt="image">
+            </div>
+            <div class="modal-body" id="shoppingModalBody">
+                <h1 class="modal-title text-center" id="shoppingModalLabel"></h1>
+                <p id="shoppingModalDesc" class="item-description-price"></p>
+
+                <div class="row" style="margin-top: 25px;">
+                    <div class="col-xs-12">
+                        <label for="numberItems">Cantidad</label>
+                        <input type="number" id="numberItems" name="numberItems" value="1" min="1" max="20">
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Acompañamientos</h3>
+                        <select name="" id="">
+                            {% for complement in complements %}
+                                <option value="{{ complement.id }}">
+                                    {{ complement.name|title }} - {{ complement.unitaryPrice|price }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Bebidas</h3>
+                        <select name="" id="">
+                            {% for drink in drinks %}
+                                <option value="{{ drink.id }}">
+                                    {{ drink.name|title }} - {{ drink.unitaryPrice|price }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row adds">
+                    <div class="col-xs-12">
+                        <h3 style="margin-bottom: -10px;">Adiciones</h3>
+                        <small>Selecciona cuantos quieras</small>
+                        <ul class="clearfix">
+                            {% for addition in additions %}
+                                <li>
+                                    <input id="checkbox-{{ addition.id }}" type="checkbox" name="checkbox-{{ addition.id }}" class="shopping-checkbox">
+                                    <span>
+                                        {{ addition.name|title }} - {{ addition.unitaryPrice|price }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer clearfix" id="shoppingModalFooter">
+                <span id="totalPrice" class="total-price pull-left"></span>
+                {# <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> #}
+                <button type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

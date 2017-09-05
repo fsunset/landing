@@ -213,7 +213,7 @@ $(document).ready(function() {
             totalPrice = 0,
             $drinksDropdown = $('#drinksDropdown'),
             $accompanimentDropdown = $('#accompanimentDropdown'),
-            $additionDropdown = $('#additionDropdown');
+            $additionContainer = $('#additionContainer');
 
         $shoppingModal.find('.modal-title').text(title);
 
@@ -225,7 +225,7 @@ $(document).ready(function() {
             success: function(data) {
                 $drinksDropdown.html(data.itemDrinks);
                 $accompanimentDropdown.html(data.itemAccompaniments);
-                $additionDropdown.html(data.itemAdditions);
+                $additionContainer.html(data.itemAdditions);
 
                 $shoppingModalDesc.html(data.description);
                 if (data.unitaryPrice > 0 ) {
@@ -233,7 +233,7 @@ $(document).ready(function() {
                 } else {
                     totalPrice = data.comboPrice;
                 }
-                $totalPrice.text('$' + totalPrice);
+                $totalPrice.text('total: $' + totalPrice);
             },
             error: function(error) {
                 console.log("An unhandled error occurred in ajax success callback: " + error);

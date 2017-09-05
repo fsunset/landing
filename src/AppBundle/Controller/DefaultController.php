@@ -36,6 +36,7 @@ class DefaultController extends Controller
 
         $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
 
+        // Drinks
         $drinks = $em->getRepository('AppBundle:Drink')->findby(array('isActive' => 1), array('name' => 'ASC'));
 
         $itemDrinks = null;
@@ -45,12 +46,23 @@ class DefaultController extends Controller
             }
         }
 
+        // Accompaniments
         $accompaniments = $em->getRepository('AppBundle:Accompaniment')->findby(array('isActive' => 1), array('name' => 'ASC'));
 
         $itemAccompaniments = null;
         foreach ($accompaniments as $accompaniment) {
             if (is_int(array_search($id, $accompaniment->getItems()))) {
                 $itemAccompaniments .= '<option value="' . $accompaniment->getId() . '">' . ucwords($accompaniment->getName()) . '</option>';
+            }
+        }
+
+        // Additions
+        $additions = $em->getRepository('AppBundle:Addition')->findby(array('isActive' => 1), array('name' => 'ASC'));
+
+        $itemAdditions = null;
+        foreach ($additions as $addition) {
+            if (is_int(array_search($id, $addition->getItems()))) {
+                $itemAdditions .= '<span><input type="checkbox" id="additionsItem" name="additionsItem" value="' . $addition->getId() . '"> ' . trim($addition->getName()) . ' <small>+ ' . $addition->getUnitaryPrice() . '</small></span>';
             }
         }
 
@@ -61,6 +73,7 @@ class DefaultController extends Controller
                 'comboPrice' => $item->getComboPrice(),
                 'itemDrinks' => $itemDrinks,
                 'itemAccompaniments' => $itemAccompaniments,
+                'itemAdditions' => $itemAdditions
             )
         );
     }

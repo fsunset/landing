@@ -1,0 +1,50 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Adiciones ({{ additions|length }} total)</h1>
+            <a href="{{ path('addition_new') }}" class="btn btn-primary">Nueva Adición</a>
+        </div>
+
+        <div class="row container list-container">
+            <table id="additionTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio Unitario</th>
+                        <th>Creado</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for addition in additions %}
+                    <tr>
+                        <td><a href="{{ path('addition_show', { 'id': addition.id }) }}">{{ addition.id }}</a></td>
+                        <td>{{ addition.code }}</td>
+                        <td>{{ addition.name }}</td>
+                        <td>{{ addition.description }}</td>
+                        <td>{{ addition.unitaryPrice }}</td>
+                        <td>{% if addition.createdAt %}{{ addition.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if addition.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('addition_show', { 'id': addition.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('addition_edit', { 'id': addition.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

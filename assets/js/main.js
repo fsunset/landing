@@ -183,6 +183,25 @@ $(document).ready(function() {
     // Initialize All DataTables
     $('.dataTable').DataTable();
 
+    var $drinkItems = $('#appbundle_drink_items');
+
+    $drinkItems.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
+
+    // Select all checkbox
+    $(document).on('click', '#selectAll', function() {
+        var $this = $(this);
+
+        if (this.checked) {
+            $this.parent().find(':checkbox').each(function() {
+                this.checked = true;
+            });
+        } else {
+            $this.parent().find(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+
     // set info for shopping modal
     $('#shoppingModal').on('show.bs.modal', function(e) {
         var $button = $(e.relatedTarget),
@@ -191,7 +210,8 @@ $(document).ready(function() {
             $shoppingModal = $(this),
             $shoppingModalDesc = $('#shoppingModalDesc'),
             $totalPrice = $('#totalPrice'),
-            totalPrice = 0;
+            totalPrice = 0,
+            $drinksDropdown = $('#drinksDropdown');
 
         $shoppingModal.find('.modal-title').text(title);
 
@@ -201,6 +221,7 @@ $(document).ready(function() {
             data: {'id': id},
             type: 'json',
             success: function(data) {
+                $drinksDropdown.html(data.itemDrinks);
                 $shoppingModalDesc.html(data.description);
                 if (data.unitaryPrice > 0 ) {
                     totalPrice = data.unitaryPrice;

@@ -19,16 +19,10 @@ class DefaultController extends Controller
 
         $featuredItems = $em->getRepository('AppBundle:Item')->findBy(array('isFeatured' => true));
         $sections = $em->getRepository('AppBundle:Section')->findAll(array(), array('order' => 'ASC'));
-        $complements = $em->getRepository('AppBundle:Item')->findBy(array('section' => 11, 'isActive' => 1), array('name' => 'ASC'));
-        $drinks = $em->getRepository('AppBundle:Item')->findBy(array('section' => 12, 'isActive' => 1), array('name' => 'ASC'));
-        $additions = $em->getRepository('AppBundle:Item')->findBy(array('section' => 13, 'isActive' => 1), array('name' => 'ASC'));
 
         return $this->render('default/index.html.twig', array(
             'featuredItems' => $featuredItems,
-            'sections' => $sections,
-            'complements' => $complements,
-            'drinks' => $drinks,
-            'additions' => $additions
+            'sections' => $sections
         ));
     }
 
@@ -41,12 +35,21 @@ class DefaultController extends Controller
         $id = $request->request->get('id');
 
         $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
+        $drinks = $em->getRepository('AppBundle:Drink')->findby(array('isActive' => 1));
+
+        $itemDrinks = null;
+        foreach ($drinks as $drink) {
+            if (is_int(array_search($id, $drink->getItems()))) {
+                $itemDrinks .= '<option value="' . $drink->getId() . '">' . $drink->getName() . '</option>';
+            }
+        }
 
         return new JsonResponse(
             array(
                 'description' => $item->getDescription(),
                 'unitaryPrice' => $item->getUnitaryPrice(),
-                'comboPrice' => $item->getComboPrice()
+                'comboPrice' => $item->getComboPrice(),
+                'itemDrinks' => $itemDrinks,
             )
         );
     }

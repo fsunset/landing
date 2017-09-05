@@ -67,6 +67,17 @@ body {
         }
     }
 
+    /*
+    * Items and Adds form
+    */
+    #appbundle_drink {
+        .checkbox {
+            width: 45%;
+            display: inline-block;
+            margin-right: 5%;
+        }
+    }
+
     .copyright {
         font-size: 20px;
     }

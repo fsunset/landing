@@ -5,7 +5,7 @@
                 <img src="{{ asset('bundles/app/img/home/menu.png') }}" alt="image">
             </div>
             <div class="modal-body" id="shoppingModalBody">
-                <h1 class="modal-title text-center" id="shoppingModalLabel"></h1>
+                <h1 class="modal-title text-center" item-id="" id="shoppingModalLabel"></h1>
                 <p id="shoppingModalDesc" class="item-description-price"></p>
 
                 <div class="row" style="margin-top: 25px;">
@@ -37,7 +37,7 @@
             <div class="modal-footer clearfix" id="shoppingModalFooter">
                 <span id="totalPrice" class="total-price pull-left"></span>
                 {# <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> #}
-                <button type="button" class="btn btn-primary">Agregar</button>
+                <button id="confirmOrderModal" type="button" class="btn btn-primary">Agregar</button>
             </div>
         </div>
     </div>

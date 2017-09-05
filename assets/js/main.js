@@ -186,7 +186,14 @@ $(document).ready(function() {
         $totalPrice = $('#totalPrice'),
         totalPrice = '',
         currentTotalPrice = '',
-        additionPrice = '';
+        additionPrice = '',
+        $contactForm = $('#contactForm'),
+        $order = [],
+        index,
+        totalPriceOrderGlobal = 0,
+        totalOrderPrice = 0,
+        $orderDetails = $('#orderDetails'),
+        orderPrice = 3900;
 
     // Select all checkbox
     $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
@@ -226,6 +233,7 @@ $(document).ready(function() {
         }
 
         $shoppingModal.find('.modal-title').text(title);
+        $shoppingModal.find('.modal-title').attr('item-id', id);
 
         $.ajax({
             url: $shoppingModal.data('url'),
@@ -285,5 +293,135 @@ $(document).ready(function() {
         }
 
         $totalPrice.text('Total: ' + accounting.formatMoney(currentTotalPrice, "$", 0, ".", ","));
+    });
+
+    // Order Proccess
+    $(document).on('click', '#confirmOrderModal', function(e) {
+        var totalPriceOrder = $('#totalPrice').text();
+
+        // Remove all but numbers from total
+        totalPriceOrder = totalPriceOrder.replace(/[^0-9]/g, '');
+
+        totalPriceOrderGlobal = parseInt(totalPriceOrderGlobal) + parseInt(totalPriceOrder);
+
+        $order.push({
+            'id': $('#shoppingModalLabel').attr('item-id'),
+            'title': $('#shoppingModalLabel').text(),
+            'description': $('#shoppingModalDesc').text(),
+            'numberOfItems': $('#numberItems').val(),
+            'accompaniment': $('#accompanimentDropdown option:selected').text(),
+            'drink': $('#drinksDropdown option:selected').text(),
+            'additions': $('.additionsItem:checkbox:checked'),
+            'totalPrice': totalPriceOrder
+        });
+
+        $orderDetails.html('');
+
+        $.each($order, function(key, itemOfOrder) {
+            var additionsText = '';
+
+            $.each(itemOfOrder.additions, function(key, addition) {
+                additionsText += $(addition).data('text') + ', ';
+            });
+
+            if (additionsText.length == 0) {
+                additionsText = 'Ninguna';
+            } else {
+                additionsText = additionsText.replace(/,([^,]*)$/,'$1');
+            }
+
+            $orderDetails.append('<div class="order-item clearfix"><button type="button" class="close delete-from-order" id="deleteFromOrder_' + itemOfOrder.id + '_' + itemOfOrder.totalPrice + '_' + key + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><h3>' + itemOfOrder.title + ' x ' + itemOfOrder.numberOfItems + '</h3><span class="float-right total-order">Total: ' + accounting.formatMoney(itemOfOrder.totalPrice, "$", 0, ".", ",") + '</span><span>' + itemOfOrder.description + '</span><span>Bebida: ' + itemOfOrder.drink + '</span><span>Acompañamiento: ' + itemOfOrder.accompaniment + '</span><span>Adiciones: ' + additionsText + '</span></div>');
+        });
+
+        totalOrderPrice = totalPriceOrderGlobal + orderPrice;
+
+        $orderDetails.append('<div class="total-order-global" id="totalOrderGlobal">Total Pedido: ' + accounting.formatMoney(totalPriceOrderGlobal, "$", 0, ".", ",") + '</div> <div class="order-price" id="orderPrice">Costo domicilio: ' + accounting.formatMoney(orderPrice, "$", 0, ".", ",") + '</div> <div class="total-order-price" id="totalOrderPrice">total a pagar: ' + accounting.formatMoney(totalOrderPrice, "$", 0, ".", ",") + '</div> <button id="confirmOrder" type="button" class="btn btn-primary generate-order" data-toggle="modal" data-target="#generateOrderModal">Generar pedido</button>');
+
+        $orderDetails.removeClass('hide');
+        $('html, body').animate({
+            scrollTop: $("#orderDetails").offset().top
+        }, 1000);
+        $('#shoppingModal').modal("hide");
+    });
+
+    // Show modal for send order by email
+    $(document).on('click', '#confirmOrder', function(){
+        var $orderInfoDetails = $('#order-info-details'),
+            htmlString = $orderDetails.html();
+
+        $(htmlString).find('button').addClass('hide');
+        $orderInfoDetails.html(htmlString);
+    });
+
+    // Finish order proccess
+    $(document).on('click', '#confirmGenerateOrderModal', function(){
+        var validation = $("#orderInfoForm input:empty").length,
+            $checkedTerms = $('#companyBill');
+
+        if (validation != 0) {
+            $('#error-validation').removeClass('hide');
+        } else {
+            $('#error-validation').addClass('hide');
+            $('#orderInfoForm').submit();
+            // if ($checkedTerms.is(':checked')) {
+            //     $('#error-validation, #error-terms').addClass('hide');
+
+            // } else {
+            //     $('#error-validation, #error-terms').removeClass('hide');
+            // }
+        }
+    });
+
+    // Remove item From Order
+    $(document).on('click', '.delete-from-order', function(){
+        var $this = $(this),
+            idString = $this.attr('id').split('_'),
+            id = idString[1],
+            price = idString[2],
+            key = idString[3],
+            $totalOrderGlobal = $('#totalOrderGlobal');
+
+            $this.parent().remove();
+
+            totalPriceOrderGlobal = parseInt(totalPriceOrderGlobal) - parseInt(price);
+            $totalOrderGlobal.text('Total Pedido: ' + accounting.formatMoney(totalPriceOrderGlobal, "$", 0, ".", ","));
+
+            // Find and remove key from $order
+            $order.splice(key, 1);
+
+            // Update total order price
+            totalOrderPrice = totalPriceOrderGlobal + orderPrice;
+
+            $('#totalOrderPrice').text('total a pagar: ' + accounting.formatMoney(totalOrderPrice, "$", 0, ".", ","));
+
+            // Hide order details container
+            if (totalPriceOrderGlobal < 1) {
+                $orderDetails.addClass('hide');
+            }
+    });
+
+    // contact form
+    $contactForm.on('submit', function(e) {
+        e.preventDefault();
+
+        var $this = $(this),
+            name = $('#name').val(),
+            phone = $('#phone').val(),
+            email = $('#email').val(),
+            subject = $('#subject').val(),
+            messageContent = $('#messageContent').val();
+
+        $.ajax({
+            url: $this.attr('action'),
+            method: 'post',
+            data: { 'name': name, 'phone': phone, 'email': email, 'subject': subject, 'messageContent': messageContent },
+            type: 'json',
+            success: function(data) {
+                $('#confirmationMessage').removeClass('hide');
+            },
+            error: function(error) {
+                console.error("An unhandled error occurred in ajax success callback: " + error);
+            }
+        });
     });
 });

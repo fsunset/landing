@@ -62,7 +62,7 @@ class DefaultController extends Controller
         $itemAdditions = null;
         foreach ($additions as $addition) {
             if (is_int(array_search($id, $addition->getItems()))) {
-                $itemAdditions .= '<span><input type="checkbox" id="additionsItem_' . $addition->getId() . '" name="additionsItem" class="additionsItem" value="' . $addition->getId() . '"> ' . trim($addition->getName()) . ' <small>+ ' . $addition->getUnitaryPrice() . '</small></span>';
+                $itemAdditions .= '<span><input type="checkbox" id="additionsItem_' . $addition->getId() . '" name="additionsItem" class="additionsItem" data-text="' . trim($addition->getName()) . '" value="' . $addition->getId() . '"> ' . trim($addition->getName()) . ' <small>+ ' . $addition->getUnitaryPrice() . '</small></span>';
             }
         }
 
@@ -107,5 +107,42 @@ class DefaultController extends Controller
     public function contactoAction(Request $request)
     {
         return $this->render('default/contacto.html.twig');
+    }
+
+
+    /**
+     * @Route("/emailContact", name="email_contact")
+     */
+    public function emailAction(Request $request)
+    {
+        $delRodeoEmail = 'francisco.sarmiento@scalablepath.com';
+        $name = $request->request->get('name');
+        $phone = $request->request->get('phone');
+        $email = $request->request->get('email');
+        $subject = $request->request->get('subject');
+        $messageContent = $request->request->get('messageContent');
+
+        $message = (new \Swift_Message('Hello Email'))
+            ->setSubject('Contacto Sitio Web Del Rodeo - ' . $subject)
+            ->setFrom($email)
+            ->setTo($delRodeoEmail)
+            ->setBody(
+                $this->renderView(
+                    'Emails/registration.html.twig', array(
+                        'name' => $name,
+                        'phone' => $phone,
+                        'messageContent' => $messageContent,
+                        'email' => $email
+                        )
+                ),
+                'text/html'
+            )
+        ;
+
+        if ($this->get('mailer')->send($message)) {
+            return new JsonResponse(array('success' => true));
+        } else {
+            return new JsonResponse(array('success' => false));
+        }
     }
 }

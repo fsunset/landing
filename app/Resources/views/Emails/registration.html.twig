@@ -1,0 +1,12 @@
+<img src="{{ absolute_url(asset('bundles/app/img/home/logo.png')) }}">
+
+<h3>Nuevo Mensaje de contacto</h3>
+
+{{ name|title }} ha enviado un mensaje de contacto desde el sitio web de Del Rodeo:
+
+<p>
+    {{ messageContent }}
+</p>
+
+ - Teléfono de contacto: {{ phone }}
+ - Email de contacto: {{ email }}

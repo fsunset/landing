@@ -1,0 +1,48 @@
+<div class="modal fade generate-order-modal bs-example-modal-lg" id="generateOrderModal" tabindex="-1" role="dialog" aria-labelledby="generateOrderModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" id="generateOrderModalBody">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 to-remove">
+                        <h3 class="text-center order-info-title">resumen de tu pedido</h3>
+                        <div class="order-info" id="order-info-details"></div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <h3 class="text-center order-info-title">informacion de pago</h3>
+                        <div class="order-info" style="margin-bottom:20px;">
+                            <form action="" id="orderInfoForm" method="post" class="order-info-form">
+                                <input required placeholder="nombre y apellidos" type="text" name="name" id="name">
+                                <input required placeholder="correo electrónico" type="text" name="email" id="email">
+                                <input required placeholder="dirección" type="text" name="address" id="address">
+                                <input required placeholder="Apto, Bloque, barrio" type="text" name="addressTwo" id="addressTwo">
+                                <input required placeholder="teléfono" type="integer" name="phone" id="phone">
+                                <label for="companyBill" style="font-size: .8em;">facturar a empresa</label>
+                                <input type="checkbox" name="companyBill" id="companyBill">
+                                <textarea name="messageContent" id="messageContent" cols="24" rows="6" required placeholder="comentarios adicionales"></textarea>
+                                <div style="font-size: .8em;" class="alert alert-danger hide" id="error-validation">todos los campos son requeridos</div>
+                            </form>
+                        </div>
+
+                        <h3 class="text-center order-info-title">método de pago</h3>
+                        <div class="order-info order-info-bottom">
+                            <select name="payment-method" id="paymentMethod" style="width:100%;">
+                                <option value="efectivo">Efectivo</option>
+                                <option value="datafono">Datafono</option>
+                            </select>
+                            <div class="">
+                                <input type="checkbox" name="companyBill" id="companyBill">
+                                <small>He leido y estoy de acuerdo con los terminos y condiciones, y con las politicas y tratamientos de datos personales</small>
+                                <div style="font-size: .8em;" class="alert alert-danger hide" id="error-terms">debes aceptar términos y condiciones</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer clearfix" id="generateOrderModalFooter">
+                <button id="confirmGenerateOrderModal" type="button" class="btn btn-primary">Realizar Pedido</button>
+            </div>
+        </div>
+    </div>
+</div>

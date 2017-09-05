@@ -58,6 +58,8 @@
             </div>
         </div>
 
+        <div class="row order-details marketing hide" id="orderDetails"></div>
+
         <div class="row marketing inherit-container">
             <div id="accordion" class="accordion-container" role="tablist" aria-multiselectable="true">
                 {% for section in sections %}
@@ -116,4 +118,6 @@
 
     <!-- Shopping Modal -->
     {% include 'Partials/shoppingModal.html.twig' %}
+    <!-- Generate Order Modal -->
+    {% include 'Partials/generateOrderModal.html.twig' %}
 {% endblock %}

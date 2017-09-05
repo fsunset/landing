@@ -177,17 +177,20 @@ _fnSplitObjNotation:La,_fnGetObjectDataFn:R,_fnSetObjectDataFn:S,_fnGetDataMaste
 _fnInitComplete:wa,_fnLengthChange:Ta,_fnFeatureHtmlLength:qb,_fnFeatureHtmlPaginate:vb,_fnPageChange:Va,_fnFeatureHtmlProcessing:sb,_fnProcessingDisplay:C,_fnFeatureHtmlTable:tb,_fnScrollDraw:ma,_fnApplyToChildren:I,_fnCalculateColumnWidths:Ha,_fnThrottle:Qa,_fnConvertToWidth:Gb,_fnGetWidestNode:Hb,_fnGetMaxLenString:Ib,_fnStringToCss:v,_fnSortFlatten:W,_fnSort:ob,_fnSortAria:Kb,_fnSortListener:Xa,_fnSortAttachListener:Oa,_fnSortingClasses:ya,_fnSortData:Jb,_fnSaveState:za,_fnLoadState:Lb,_fnSettingsFromNode:Aa,
 _fnLog:K,_fnMap:F,_fnBindAction:Ya,_fnCallbackReg:z,_fnCallbackFire:s,_fnLengthOverflow:Ua,_fnRenderer:Pa,_fnDataSource:y,_fnRowAttributes:Na,_fnCalculateEnd:function(){}});h.fn.dataTable=m;m.$=h;h.fn.dataTableSettings=m.settings;h.fn.dataTableExt=m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,function(a,b){h.fn.DataTable[a]=b});return h.fn.dataTable});
 
-
-
 $(document).ready(function() {
     // Initialize All DataTables
     $('.dataTable').DataTable();
 
-    var $itemsContainer = $('#appbundle_drink_items, #appbundle_accompaniment_items, #appbundle_addition_items');
-
-    $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
+    var $itemsContainer = $('#appbundle_drink_items, #appbundle_accompaniment_items, #appbundle_addition_items'),
+        $numberItems = $('#numberItems'),
+        $totalPrice = $('#totalPrice'),
+        totalPrice = '',
+        currentTotalPrice = '',
+        additionPrice = '';
 
     // Select all checkbox
+    $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
+
     $(document).on('click', '#selectAll', function() {
         var $this = $(this);
 
@@ -209,11 +212,18 @@ $(document).ready(function() {
             id = $button.data('id'),
             $shoppingModal = $(this),
             $shoppingModalDesc = $('#shoppingModalDesc'),
-            $totalPrice = $('#totalPrice'),
-            totalPrice = 0,
             $drinksDropdown = $('#drinksDropdown'),
             $accompanimentDropdown = $('#accompanimentDropdown'),
-            $additionContainer = $('#additionContainer');
+            $additionContainer = $('#additionContainer'),
+            $toHide = $('.to-hide');
+
+        $numberItems.val(1);
+
+        if (id == '50') {
+            $toHide.hide();
+        } else {
+            $toHide.show();
+        }
 
         $shoppingModal.find('.modal-title').text(title);
 
@@ -233,7 +243,8 @@ $(document).ready(function() {
                 } else {
                     totalPrice = data.comboPrice;
                 }
-                $totalPrice.text('total: $' + totalPrice);
+                currentTotalPrice = totalPrice = parseInt(totalPrice);
+                $totalPrice.text('total: ' + accounting.formatMoney(totalPrice, "$", 0, ".", ","));
             },
             error: function(error) {
                 console.log("An unhandled error occurred in ajax success callback: " + error);
@@ -241,14 +252,38 @@ $(document).ready(function() {
         });
     });
 
-    // Update total price in shopping modal
-    $('.shopping-checkbox').mousedown(function() {
+    // Get total price when changing number of items
+    $numberItems.on('change paste', function(){
+        var $this = $(this),
+            itemNumberVal = $this.val();
+
+        if (itemNumberVal == 0 || itemNumberVal > 20 || itemNumberVal < 1) {
+            $this.val(1);
+            itemNumberVal = 1;
+        }
+
+        if (itemNumberVal == 1) {
+            currentTotalPrice = parseInt(totalPrice);
+        } else {
+            currentTotalPrice = parseInt(currentTotalPrice) * parseInt(itemNumberVal);
+        }
+
+        $totalPrice.text('Total: ' + accounting.formatMoney(currentTotalPrice, "$", 0, ".", ","));
+    });
+
+    // Get total price when selecting additions
+    $(document).on('click', '.additionsItem', function(){
         var $this = $(this);
 
-        if ($this.is(':checked')) {
-            console.log($this.siblings().text());
+        additionPrice = $this.siblings('small').text();
+        additionPrice = parseInt(additionPrice.replace('+ ', ''));
+
+        if (this.checked) {
+            currentTotalPrice = additionPrice + currentTotalPrice;
         } else {
-            console.log($this.siblings().text());
+            currentTotalPrice = currentTotalPrice - additionPrice;
         }
+
+        $totalPrice.text('Total: ' + accounting.formatMoney(currentTotalPrice, "$", 0, ".", ","));
     });
 });

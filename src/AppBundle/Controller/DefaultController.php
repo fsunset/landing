@@ -62,7 +62,7 @@ class DefaultController extends Controller
         $itemAdditions = null;
         foreach ($additions as $addition) {
             if (is_int(array_search($id, $addition->getItems()))) {
-                $itemAdditions .= '<span><input type="checkbox" id="additionsItem" name="additionsItem" value="' . $addition->getId() . '"> ' . trim($addition->getName()) . ' <small>+ ' . $addition->getUnitaryPrice() . '</small></span>';
+                $itemAdditions .= '<span><input type="checkbox" id="additionsItem_' . $addition->getId() . '" name="additionsItem" class="additionsItem" value="' . $addition->getId() . '"> ' . trim($addition->getName()) . ' <small>+ ' . $addition->getUnitaryPrice() . '</small></span>';
             }
         }
 

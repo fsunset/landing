@@ -35,12 +35,22 @@ class DefaultController extends Controller
         $id = $request->request->get('id');
 
         $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
-        $drinks = $em->getRepository('AppBundle:Drink')->findby(array('isActive' => 1));
+
+        $drinks = $em->getRepository('AppBundle:Drink')->findby(array('isActive' => 1), array('name' => 'ASC'));
 
         $itemDrinks = null;
         foreach ($drinks as $drink) {
             if (is_int(array_search($id, $drink->getItems()))) {
-                $itemDrinks .= '<option value="' . $drink->getId() . '">' . $drink->getName() . '</option>';
+                $itemDrinks .= '<option value="' . $drink->getId() . '">' . ucwords($drink->getName()) . '</option>';
+            }
+        }
+
+        $accompaniments = $em->getRepository('AppBundle:Accompaniment')->findby(array('isActive' => 1), array('name' => 'ASC'));
+
+        $itemAccompaniments = null;
+        foreach ($accompaniments as $accompaniment) {
+            if (is_int(array_search($id, $accompaniment->getItems()))) {
+                $itemAccompaniments .= '<option value="' . $accompaniment->getId() . '">' . ucwords($accompaniment->getName()) . '</option>';
             }
         }
 
@@ -50,6 +60,7 @@ class DefaultController extends Controller
                 'unitaryPrice' => $item->getUnitaryPrice(),
                 'comboPrice' => $item->getComboPrice(),
                 'itemDrinks' => $itemDrinks,
+                'itemAccompaniments' => $itemAccompaniments,
             )
         );
     }

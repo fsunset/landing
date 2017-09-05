@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="container form-container">
+        <h1>Nuevo Acompañamiento</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <input type="submit" value="Crear Acompañamiento" class="btn btn-primary"/>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

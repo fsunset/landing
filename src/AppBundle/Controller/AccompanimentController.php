@@ -2,40 +2,41 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Drink;
+use AppBundle\Entity\Accompaniment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Query;
 
+
 /**
- * Drink controller.
+ * Accompaniment controller.
  *
- * @Route("admin/drink")
+ * @Route("admin/accompaniment")
  */
-class DrinkController extends Controller
+class AccompanimentController extends Controller
 {
     /**
-     * Lists all drink entities.
+     * Lists all accompaniment entities.
      *
-     * @Route("/", name="drink_index")
+     * @Route("/", name="accompaniment_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $drinks = $em->getRepository('AppBundle:Drink')->findAll();
+        $accompaniments = $em->getRepository('AppBundle:Accompaniment')->findAll();
 
-        return $this->render('drink/index.html.twig', array(
-            'drinks' => $drinks,
+        return $this->render('accompaniment/index.html.twig', array(
+            'accompaniments' => $accompaniments,
         ));
     }
 
     /**
-     * Creates a new drink entity.
+     * Creates a new accompaniment entity.
      *
-     * @Route("/new", name="drink_new")
+     * @Route("/new", name="accompaniment_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -54,48 +55,47 @@ class DrinkController extends Controller
             $items[trim(strtoupper($item['name']))] = $item['id'];
         }
 
-        $drink = new Drink();
-        $form = $this->createForm('AppBundle\Form\DrinkType', $drink, array('items' => $items));
+        $accompaniment = new Accompaniment();
+        $form = $this->createForm('AppBundle\Form\AccompanimentType', $accompaniment, array('items' => $items));
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($drink);
+            $em->persist($accompaniment);
             $em->flush();
 
-            return $this->redirectToRoute('drink_show', array('id' => $drink->getId()));
+            return $this->redirectToRoute('accompaniment_show', array('id' => $accompaniment->getId()));
         }
 
-        return $this->render('drink/new.html.twig', array(
-            'drink' => $drink,
-            'form' => $form->createView()
+        return $this->render('accompaniment/new.html.twig', array(
+            'accompaniment' => $accompaniment,
+            'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a drink entity.
+     * Finds and displays a accompaniment entity.
      *
-     * @Route("/{id}", name="drink_show")
+     * @Route("/{id}", name="accompaniment_show")
      * @Method("GET")
      */
-    public function showAction(Drink $drink)
+    public function showAction(Accompaniment $accompaniment)
     {
-        $deleteForm = $this->createDeleteForm($drink);
+        $deleteForm = $this->createDeleteForm($accompaniment);
 
-        return $this->render('drink/show.html.twig', array(
-            'drink' => $drink,
+        return $this->render('accompaniment/show.html.twig', array(
+            'accompaniment' => $accompaniment,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing drink entity.
+     * Displays a form to edit an existing accompaniment entity.
      *
-     * @Route("/{id}/edit", name="drink_edit")
+     * @Route("/{id}/edit", name="accompaniment_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Drink $drink)
+    public function editAction(Request $request, Accompaniment $accompaniment)
     {
         $query = $this->getDoctrine()
             ->getRepository('AppBundle:Item')
@@ -111,54 +111,54 @@ class DrinkController extends Controller
             $items[trim(strtoupper($item['name']))] = $item['id'];
         }
 
-        $deleteForm = $this->createDeleteForm($drink);
-        $editForm = $this->createForm('AppBundle\Form\DrinkType', $drink, array('items' => $items));
+        $deleteForm = $this->createDeleteForm($accompaniment);
+        $editForm = $this->createForm('AppBundle\Form\AccompanimentType', $accompaniment, array('items' => $items));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('drink_show', array('id' => $drink->getId()));
+            return $this->redirectToRoute('accompaniment_show', array('id' => $accompaniment->getId()));
         }
 
-        return $this->render('drink/edit.html.twig', array(
-            'drink' => $drink,
+        return $this->render('accompaniment/edit.html.twig', array(
+            'accompaniment' => $accompaniment,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a drink entity.
+     * Deletes a accompaniment entity.
      *
-     * @Route("/{id}", name="drink_delete")
+     * @Route("/{id}", name="accompaniment_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Drink $drink)
+    public function deleteAction(Request $request, Accompaniment $accompaniment)
     {
-        $form = $this->createDeleteForm($drink);
+        $form = $this->createDeleteForm($accompaniment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($drink);
+            $em->remove($accompaniment);
             $em->flush();
         }
 
-        return $this->redirectToRoute('drink_index');
+        return $this->redirectToRoute('accompaniment_index');
     }
 
     /**
-     * Creates a form to delete a drink entity.
+     * Creates a form to delete a accompaniment entity.
      *
-     * @param Drink $drink The drink entity
+     * @param Accompaniment $accompaniment The accompaniment entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Drink $drink)
+    private function createDeleteForm(Accompaniment $accompaniment)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('drink_delete', array('id' => $drink->getId())))
+            ->setAction($this->generateUrl('accompaniment_delete', array('id' => $accompaniment->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -70,7 +70,9 @@ body {
     /*
     * Items and Adds form
     */
-    #appbundle_drink {
+    #appbundle_drink,
+    #appbundle_accompaniment,
+    #appbundle_addition {
         .checkbox {
             width: 45%;
             display: inline-block;

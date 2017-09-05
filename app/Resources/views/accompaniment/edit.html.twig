@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% form_theme edit_form 'form/bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="container edit-container">
+        <h1>Editar Acompañamiento</h1>
+
+        {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Editar" class="btn btn-primary"/>
+        {{ form_end(edit_form) }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Acompañamientos ({{ accompaniments|length }} total)</h1>
+            <a href="{{ path('accompaniment_new') }}" class="btn btn-primary">Nuevo Acompañamiento</a>
+        </div>
+
+        <div class="row container list-container">
+            <table id="accompanimentTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio Unitario</th>
+                        <th>Creado</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for accompaniment in accompaniments %}
+                    <tr>
+                        <td><a href="{{ path('accompaniment_show', { 'id': accompaniment.id }) }}">{{ accompaniment.id }}</a></td>
+                        <td>{{ accompaniment.code }}</td>
+                        <td>{{ accompaniment.name }}</td>
+                        <td>{{ accompaniment.description }}</td>
+                        <td>{{ accompaniment.unitaryPrice }}</td>
+                        <td>{% if accompaniment.createdAt %}{{ accompaniment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if accompaniment.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('accompaniment_show', { 'id': accompaniment.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('accompaniment_edit', { 'id': accompaniment.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

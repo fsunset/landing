@@ -183,9 +183,9 @@ $(document).ready(function() {
     // Initialize All DataTables
     $('.dataTable').DataTable();
 
-    var $drinkItems = $('#appbundle_drink_items');
+    var $itemsContainer = $('#appbundle_drink_items, #appbundle_accompaniment_items, #appbundle_addition_items');
 
-    $drinkItems.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
+    $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
 
     // Select all checkbox
     $(document).on('click', '#selectAll', function() {
@@ -211,7 +211,9 @@ $(document).ready(function() {
             $shoppingModalDesc = $('#shoppingModalDesc'),
             $totalPrice = $('#totalPrice'),
             totalPrice = 0,
-            $drinksDropdown = $('#drinksDropdown');
+            $drinksDropdown = $('#drinksDropdown'),
+            $accompanimentDropdown = $('#accompanimentDropdown'),
+            $additionDropdown = $('#additionDropdown');
 
         $shoppingModal.find('.modal-title').text(title);
 
@@ -222,6 +224,9 @@ $(document).ready(function() {
             type: 'json',
             success: function(data) {
                 $drinksDropdown.html(data.itemDrinks);
+                $accompanimentDropdown.html(data.itemAccompaniments);
+                $additionDropdown.html(data.itemAdditions);
+
                 $shoppingModalDesc.html(data.description);
                 if (data.unitaryPrice > 0 ) {
                     totalPrice = data.unitaryPrice;

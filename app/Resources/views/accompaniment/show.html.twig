@@ -1,0 +1,57 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container show-container">
+        <h1>Acompañamiento</h1>
+
+        <table id="showSectionTable" class="display dataTable" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ accompaniment.id }}</td>
+            </tr>
+            <tr>
+                <th>Código</th>
+                <td>{{ accompaniment.code }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ accompaniment.name }}</td>
+            </tr>
+            <tr>
+                <th>Descripción</th>
+                <td>{{ accompaniment.description }}</td>
+            </tr>
+            <tr>
+                <th>Precio Unitario</th>
+                <td>{{ accompaniment.unitaryPrice }}</td>
+            </tr>
+            <tr>
+                <th>Creado</th>
+                <td>{% if accompaniment.createdAt %}{{ accompaniment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{% if accompaniment.isActive %}Si{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Platos</th>
+                <td>
+                    <ul>
+                        {% for item in accompaniment.items %}
+                            <li>{{ item|getItemById|title }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <div class="row-fluid btn-container clearfix">
+            <a href="{{ path('accompaniment_edit', { 'id': accompaniment.id }) }}" class="btn btn-primary">Editar</a>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Eliminar" class="btn btn-primary">
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

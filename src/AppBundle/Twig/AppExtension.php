@@ -11,6 +11,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('menuItem', array($this, 'menuItemFilter')),
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
+            new \Twig_SimpleFilter('getItemById', array($this, 'getItemByIdFilter')),
         );
     }
 
@@ -29,6 +30,14 @@ class AppExtension extends \Twig_Extension
             return $items;
         }
         return count($items);
+    }
+
+    public function getItemByIdFilter($id)
+    {
+        $em = $this->doctrine->getManager();
+        $item = $em->getRepository('AppBundle:Item')->findOneById($id);
+
+        return $item->getName();
     }
 
     public function priceFilter($number, $decimals = 0, $decPoint = ',', $thousandsSep = '.')

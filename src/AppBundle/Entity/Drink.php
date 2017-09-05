@@ -3,15 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Item
+ * Drink
  *
- * @ORM\Table(name="item")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
+ * @ORM\Table(name="drink")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DrinkRepository")
  */
-class Item
+class Drink
 {
     /**
      * @var int
@@ -30,6 +29,11 @@ class Item
     private $code;
 
     /**
+     * @ORM\Column(name="items", type="array")
+     */
+    private $items;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -42,33 +46,6 @@ class Item
      * @ORM\Column(name="description", type="string", length=500)
      */
     private $description;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Section", inversedBy="items")
-     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
-     */
-    private $section;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="unitaryPrice", type="integer", nullable=true)
-     */
-    private $unitaryPrice;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="comboPrice", type="integer", nullable=true)
-     */
-    private $comboPrice;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="isFeatured", type="boolean")
-     */
-    private $isFeatured;
 
     /**
      * @var \DateTime
@@ -84,10 +61,15 @@ class Item
      */
     private $isActive;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="unitaryPrice", type="integer")
+     */
+    private $unitaryPrice;
 
     public function __construct()
     {
-        $this->isFeatured = false;
         $this->createdAt= new \DateTime();
         $this->isActive = true;
     }
@@ -104,11 +86,25 @@ class Item
     }
 
     /**
+     * Get items
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    public function setItems(array $items)
+    {
+        $this->items = $items;
+        return $this;
+    }
+
+    /**
      * Set code
      *
      * @param integer $code
      *
-     * @return Item
+     * @return Drink
      */
     public function setCode($code)
     {
@@ -132,7 +128,7 @@ class Item
      *
      * @param string $name
      *
-     * @return Item
+     * @return Drink
      */
     public function setName($name)
     {
@@ -156,7 +152,7 @@ class Item
      *
      * @param string $description
      *
-     * @return Item
+     * @return Drink
      */
     public function setDescription($description)
     {
@@ -176,107 +172,11 @@ class Item
     }
 
     /**
-     * Set section
-     *
-     * @param \AppBundle\Entity\Section $section
-     *
-     * @return Project
-     */
-    public function setSection(\AppBundle\Entity\Section $section = null)
-    {
-        $this->section = $section;
-
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return \AppBundle\Entity\Section
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
-
-    /**
-     * Set unitaryPrice
-     *
-     * @param integer $unitaryPrice
-     *
-     * @return Item
-     */
-    public function setUnitaryPrice($unitaryPrice)
-    {
-        $this->unitaryPrice = $unitaryPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get unitaryPrice
-     *
-     * @return int
-     */
-    public function getUnitaryPrice()
-    {
-        return $this->unitaryPrice;
-    }
-
-    /**
-     * Set comboPrice
-     *
-     * @param integer $comboPrice
-     *
-     * @return Item
-     */
-    public function setComboPrice($comboPrice)
-    {
-        $this->comboPrice = $comboPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get comboPrice
-     *
-     * @return int
-     */
-    public function getComboPrice()
-    {
-        return $this->comboPrice;
-    }
-
-    /**
-     * Set isFeatured
-     *
-     * @param boolean $isFeatured
-     *
-     * @return Item
-     */
-    public function setIsFeatured($isFeatured)
-    {
-        $this->isFeatured = $isFeatured;
-
-        return $this;
-    }
-
-    /**
-     * Get isFeatured
-     *
-     * @return bool
-     */
-    public function getIsFeatured()
-    {
-        return $this->isFeatured;
-    }
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
-     * @return Item
+     * @return Drink
      */
     public function setCreatedAt($createdAt)
     {
@@ -300,7 +200,7 @@ class Item
      *
      * @param boolean $isActive
      *
-     * @return Item
+     * @return Drink
      */
     public function setIsActive($isActive)
     {
@@ -317,6 +217,30 @@ class Item
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set unitaryPrice
+     *
+     * @param integer $unitaryPrice
+     *
+     * @return Drink
+     */
+    public function setUnitaryPrice($unitaryPrice)
+    {
+        $this->unitaryPrice = $unitaryPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get unitaryPrice
+     *
+     * @return int
+     */
+    public function getUnitaryPrice()
+    {
+        return $this->unitaryPrice;
     }
 }
 

@@ -23,7 +23,16 @@
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         <li class="{% if route[0] == 'section' %}active{% endif %}"><a href="{{path('section_index')}}">Secciones</a></li>
-                        <li class="{% if route[0] == 'item' %}active{% endif %}"><a href="{{path('item_index')}}">Productos</a></li>
+
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Comidas <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="{% if route[0] == 'item' %}active{% endif %}"><a href="{{path('item_index')}}">Platos</a></li>
+                                <li class="{% if route[0] == 'drink' %}active{% endif %}"><a href="{{path('drink_index')}}">Bebidas</a></li>
+                            </ul>
+                        </li>
                         <li class="{% if route[0] == 'branch' %}active{% endif %}"><a href="{{path('branch_index')}}">Sucursales</a></li>
                         <li><a href="{{path('homepage')}}">Sitio Público</a></li>
                     </ul>

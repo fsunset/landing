@@ -1,0 +1,50 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Bebidas ({{ drinks|length }} total)</h1>
+            <a href="{{ path('drink_new') }}" class="btn btn-primary">Nueva Bebida</a>
+        </div>
+
+        <div class="row container list-container">
+            <table id="drinkTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio Unitario</th>
+                        <th>Creado</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for drink in drinks %}
+                    <tr>
+                        <td><a href="{{ path('drink_show', { 'id': drink.id }) }}">{{ drink.id }}</a></td>
+                        <td>{{ drink.code }}</td>
+                        <td>{{ drink.name }}</td>
+                        <td>{{ drink.description }}</td>
+                        <td>{{ drink.unitaryPrice }}</td>
+                        <td>{% if drink.createdAt %}{{ drink.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if drink.isActive %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('drink_show', { 'id': drink.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('drink_edit', { 'id': drink.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

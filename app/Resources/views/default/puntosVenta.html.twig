@@ -31,14 +31,14 @@
                 {% for branch in branches %}
                     {# <div class="col-sm-6 box"> #}
                         <div class="row box sales-box">
-                            <div class="col-sm-6">
-                                <img src="http://via.placeholder.com/400x200" alt="Image" class="img-thumbnail">
+                            <div class="col-sm-6" style="padding-bottom: 2%;">
+                                <img src="{{ asset('bundles/app/img/branches/' ~ branch.name|lower|replace(' ', '_') ~ '.jpg') }}" alt="Image" class="img-thumbnail">
                             </div>
                             <div class="col-sm-6">
-                                <h3>{{ branch.name|title }}</h3>
-                                <p>{{ branch.address }}</p>
-                                <p>{{ branch.phone }}</p>
-                                <p>{{ branch.hours }}</p>
+                                <h3 style="margin-top: 2%;">{{ branch.name|title }}</h3>
+                                <p style="font-size: .85em;">{{ branch.address }}</p>
+                                {# <p>{{ branch.phone }}</p> #}
+                                <p style="font-size: .85em;">Horarios de atención:<br>{{ branch.hours|nl2br }}</p>
                             </div>
                         </div>
                     {# </div> #}

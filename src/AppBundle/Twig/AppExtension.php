@@ -12,6 +12,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('menuItem', array($this, 'menuItemFilter')),
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
             new \Twig_SimpleFilter('getItemById', array($this, 'getItemByIdFilter')),
+            new \Twig_SimpleFilter('fileExists', array($this, 'fileExistsFilter')),
         );
     }
 

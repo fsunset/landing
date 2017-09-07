@@ -90,7 +90,7 @@
                                                 <div class="item-name text-center">
                                                     <h3>{{ item.name|lower }}</h3>
                                                 </div>
-                                                <img class="combo" src="{{ asset('bundles/app/img/home/menu.png') }}" alt="{{item.name|lower}}">
+                                                <img class="combo" src="{{ asset('bundles/app/img/home/menu/' ~ item.code ~ '.jpg') }}" alt="{{item.name|lower}}">
                                                 <div class="item-description-price text-center">
                                                     <p>{{ item.description|lower }}</p>
                                                     {% if item.unitaryPrice > 0 %}

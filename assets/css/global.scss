@@ -205,7 +205,10 @@ body {
             padding: 15px;
 
             img {
-                &.combo { width: 100%; }
+                &.combo {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
 
                 &.shopping-car {
                     bottom: 10px;

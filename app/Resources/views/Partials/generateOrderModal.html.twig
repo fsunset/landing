@@ -12,14 +12,14 @@
                         <h3 class="text-center order-info-title">informacion de pago</h3>
                         <div class="order-info" style="margin-bottom:20px;">
                             <form action="" id="orderInfoForm" method="post" class="order-info-form">
-                                <input required placeholder="nombre y apellidos" type="text" name="name" id="name">
-                                <input required placeholder="correo electrónico" type="text" name="email" id="email">
-                                <input required placeholder="dirección" type="text" name="address" id="address">
-                                <input required placeholder="Apto, Bloque, barrio" type="text" name="addressTwo" id="addressTwo">
-                                <input required placeholder="teléfono" type="integer" name="phone" id="phone">
+                                <input class="required" placeholder="nombre y apellidos" type="text" name="name" id="name">
+                                <input class="required" placeholder="correo electrónico" type="text" name="email" id="email">
+                                <input class="required" placeholder="dirección" type="text" name="address" id="address">
+                                <input class="required" placeholder="Apto, Bloque, barrio" type="text" name="addressTwo" id="addressTwo">
+                                <input class="required" placeholder="teléfono" type="text" name="phone" id="phone">
                                 <label for="companyBill" style="font-size: .8em;">facturar a empresa</label>
                                 <input type="checkbox" name="companyBill" id="companyBill">
-                                <textarea name="messageContent" id="messageContent" cols="24" rows="6" required placeholder="comentarios adicionales"></textarea>
+                                <textarea name="messageContent" id="messageContent" cols="24" rows="6" placeholder="comentarios adicionales"></textarea>
                                 <div style="font-size: .8em;" class="alert alert-danger hide" id="error-validation">todos los campos son requeridos</div>
                             </form>
                         </div>
@@ -31,7 +31,7 @@
                                 <option value="datafono">Datafono</option>
                             </select>
                             <div class="">
-                                <input type="checkbox" name="companyBill" id="companyBill">
+                                <input type="checkbox" name="termsCheckbox" id="termsCheckbox">
                                 <small>He leido y estoy de acuerdo con los terminos y condiciones, y con las politicas y tratamientos de datos personales</small>
                                 <div style="font-size: .8em;" class="alert alert-danger hide" id="error-terms">debes aceptar términos y condiciones</div>
                             </div>

@@ -622,19 +622,26 @@ body {
                 padding: 10px;
 
                 input {
+                    border: 1px solid #432b1c;
                     color: #432b1c;
                     width: 90%;
                     margin: 5px 5%;
                     font-size: .8em;
 
                     &[type=checkbox] {
+                        border: 1px solid #432b1c;
                         width: auto;
                         margin-left: 1px;
                         vertical-align: middle;
                     }
+
+                    &.error {
+                        border: 1px solid indianred;
+                    }
                 }
 
                 textarea {
+                    border: 1px solid #432b1c;
                     color: #432b1c;
                     width: 90%;
                     margin: 5px 5%;

@@ -344,7 +344,7 @@ $(document).ready(function() {
         $('#shoppingModal').modal("hide");
     });
 
-    // Show modal for send order by email
+    // Populate modal for finish order process -send order by email-
     $(document).on('click', '#confirmOrder', function(){
         var $orderInfoDetails = $('#order-info-details'),
             htmlString = $orderDetails.html();
@@ -355,20 +355,25 @@ $(document).ready(function() {
 
     // Finish order proccess
     $(document).on('click', '#confirmGenerateOrderModal', function(){
-        var validation = $("#orderInfoForm input:empty").length,
-            $checkedTerms = $('#companyBill');
+        var $validation = $("#orderInfoForm input.required").filter(function() {
+                return !this.value;
+            }),
+            $checkedTerms = $('#termsCheckbox:checkbox:checked').length,
+            $formInputs = $('#orderInfoForm input');
 
-        if (validation != 0) {
+        if ($validation.length != 0) {
+            $validation.addClass('error');
             $('#error-validation').removeClass('hide');
         } else {
+            $formInputs.removeClass('error');
             $('#error-validation').addClass('hide');
-            $('#orderInfoForm').submit();
-            // if ($checkedTerms.is(':checked')) {
-            //     $('#error-validation, #error-terms').addClass('hide');
 
-            // } else {
-            //     $('#error-validation, #error-terms').removeClass('hide');
-            // }
+            if ($checkedTerms > 0) {
+                $('#error-terms').addClass('hide');
+                $('#orderInfoForm').submit();
+            } else {
+                $('#error-terms').removeClass('hide');
+            }
         }
     });
 

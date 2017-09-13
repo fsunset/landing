@@ -84,12 +84,28 @@ class Item
      */
     private $isActive;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isDuo", type="boolean")
+     */
+    private $isDuo;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="showSelections", type="boolean")
+     */
+    private $showSelections;
+
 
     public function __construct()
     {
         $this->isFeatured = false;
         $this->createdAt= new \DateTime();
         $this->isActive = true;
+        $this->isDuo = false;
+        $this->showSelections = true;
     }
 
 
@@ -317,6 +333,54 @@ class Item
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set isDuo
+     *
+     * @param boolean $isDuo
+     *
+     * @return Item
+     */
+    public function setIsDuo($isDuo)
+    {
+        $this->isDuo = $isDuo;
+
+        return $this;
+    }
+
+    /**
+     * Get isDuo
+     *
+     * @return bool
+     */
+    public function getIsDuo()
+    {
+        return $this->isDuo;
+    }
+
+    /**
+     * Set showSelections
+     *
+     * @param boolean $showSelections
+     *
+     * @return Item
+     */
+    public function setshowSelections($showSelections)
+    {
+        $this->showSelections = $showSelections;
+
+        return $this;
+    }
+
+    /**
+     * Get showSelections
+     *
+     * @return bool
+     */
+    public function getshowSelections()
+    {
+        return $this->showSelections;
     }
 }
 

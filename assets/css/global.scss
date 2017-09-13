@@ -527,16 +527,18 @@ body {
     ** Shopping Modal
      */
     .modal {
-        &.shopping-modal .modal-header {
-            background-image: url($imgHomePath + 'madera.png');
-            height: 300px;
-            background-repeat: no-repeat;
-            background-position: bottom;
-            background-size: contain;
+        &.shopping-modal {
+            .modal-header {
+                background-image: url($imgHomePath + 'madera.png');
+                height: 300px;
+                background-repeat: no-repeat;
+                background-position: bottom;
+                background-size: contain;
 
-            img {
-                width: 60%;
-                margin-left: 20%;
+                img {
+                    width: 60%;
+                    margin-left: 20%;
+                }
             }
         }
 

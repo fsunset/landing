@@ -37,6 +37,12 @@ class ItemType extends AbstractType
             ->add('isActive', null, array(
                 'label_format' => 'Activo',
             ))
+            ->add('isDuo', null, array(
+                'label_format' => '¿Es Combo Duo?',
+            ))
+            ->add('showSelections', null, array(
+                'label_format' => 'Mostrar selecciones (Adiciones, Bebidas y Acompañamientos)',
+            ))
             ->add('section', null, array(
                 'required'   => true,
                 'label_format' => 'Sección',

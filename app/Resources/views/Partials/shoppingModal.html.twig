@@ -8,31 +8,57 @@
                 <h1 class="modal-title text-center" item-id="" id="shoppingModalLabel"></h1>
                 <p id="shoppingModalDesc" class="item-description-price"></p>
 
-                <div class="row" style="margin-top: 25px;">
-                    {# <div class="col-xs-12">
-                        <label for="numberItems">Cantidad</label>
-                        <input type="number" id="numberItems" name="numberItems" value="1" min="1" max="20">
-                    </div> #}
+                <div class="row selections" style="margin-top: 25px;">
+                    <div class="col-xs-12 combo-duo">
+                        <h3 style="font-size: 27px;">Selecciones Combo 1</h3>
+                    </div>
 
-                    <div class="col-xs-12 col-sm-6 to-hide">
+                    <div class="col-xs-12 col-sm-6">
                         <h3>Acompañamientos</h3>
                         <select name="accompanimentDropdown" id="accompanimentDropdown">
                         </select>
                     </div>
-                    <div class="col-xs-12 col-sm-6 to-hide">
+                    <div class="col-xs-12 col-sm-6">
                         <h3>Bebidas</h3>
                         <select name="drinksDropdown" id="drinksDropdown">
                         </select>
                     </div>
                 </div>
 
-                <div class="row adds to-hide">
+                <div class="row adds selections">
                     <div class="col-xs-12">
                         <h3 style="margin-bottom: -10px;">Adiciones</h3>
                         <small>Selecciona cuantos quieras</small>
                         <div class="addition-container clearfix" id="additionContainer"></div>
                     </div>
                 </div>
+
+                {# for Combos Duo Only! #}
+                <div class="row combo-duo selections" style="margin-top: 25px;">
+                    <div class="col-xs-12 combo-duo">
+                        <h3 style="font-size: 27px;">Selecciones Combo 2</h3>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Acompañamientos</h3>
+                        <select name="accompanimentDropdownDuo" id="accompanimentDropdownDuo">
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Bebidas</h3>
+                        <select name="drinksDropdownDuo" id="drinksDropdownDuo">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row adds combo-duo selections">
+                    <div class="col-xs-12">
+                        <h3 style="margin-bottom: -10px;">Adiciones</h3>
+                        <small>Selecciona cuantos quieras</small>
+                        <div class="addition-container clearfix" id="additionContainerDuo"></div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer clearfix" id="shoppingModalFooter">
                 <span id="totalPrice" class="total-price pull-left"></span>

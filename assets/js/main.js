@@ -220,17 +220,33 @@ $(document).ready(function() {
         var $button = $(e.relatedTarget),
             title = $button.data('title'),
             id = $button.data('id'),
+            showSelections = $button.data('show-selections'),
+            isDuo = $button.data('is-duo'),
             $shoppingModal = $(this),
             $shoppingModalDesc = $('#shoppingModalDesc'),
             $drinksDropdown = $('#drinksDropdown'),
             $accompanimentDropdown = $('#accompanimentDropdown'),
             $additionContainer = $('#additionContainer'),
-            $toHide = $('.to-hide');
+            $toggleSelections = $('.selections'),
+            $togglecomboDuo = $('.combo-duo'),
 
-        if (id == '50') {
-            $toHide.hide();
+            // For Combo Duo Only!
+            $drinksDropdownDuo = $('#drinksDropdownDuo'),
+            $accompanimentDropdownDuo = $('#accompanimentDropdownDuo'),
+            $additionContainerDuo = $('#additionContainerDuo');
+
+        // Toggle Selections for i.e. iceCream/beer = no, combos = yes
+        if (showSelections == 'no') {
+            $toggleSelections.hide();
         } else {
-            $toHide.show();
+            $toggleSelections.show();
+        }
+
+        // Toggle combo Duo Selections Only
+        if (isDuo == 'no') {
+            $togglecomboDuo.hide();
+        } else {
+            $togglecomboDuo.show();
         }
 
         $shoppingModal.find('.modal-title').text(title);
@@ -245,10 +261,21 @@ $(document).ready(function() {
                 $drinksDropdown.html(data.itemDrinks);
                 $accompanimentDropdown.html(data.itemAccompaniments);
                 $additionContainer.html(data.itemAdditions);
+
+                // For Combo Duo Only!
+                $drinksDropdownDuo.html(data.itemDrinks);
+                $accompanimentDropdownDuo.html(data.itemAccompaniments);
+                $additionContainerDuo.html(data.itemAdditions);
+
                 $shoppingModalDesc.html(data.description);
 
                 firstDrinkPrice = parseInt(data.firstDrinkPrice);
                 firstAccompanimentPrice = parseInt(data.firstAccompanimentPrice);
+
+                if (isDuo == 'yes') {
+                    firstDrinkPrice = parseInt(data.firstDrinkPrice) * 2;
+                    firstAccompanimentPrice = parseInt(data.firstAccompanimentPrice) * 2;
+                }
 
                 if (data.unitaryPrice > 0 ) {
                     totalPrice = data.unitaryPrice + firstDrinkPrice + firstAccompanimentPrice;
@@ -309,7 +336,7 @@ $(document).ready(function() {
     });
 
     // Get current accompaniments/drinks price when clicking dropdowns
-    $('#accompanimentDropdown, #drinksDropdown').on('click', function(){
+    $('#accompanimentDropdown, #drinksDropdown, #accompanimentDropdownDuo, #drinksDropdownDuo').on('click', function(){
         var $this = $(this),
             myCurrentText = $this.find(":selected").text(),
             myCurrentValArray = myCurrentText.split('+ ');
@@ -318,7 +345,7 @@ $(document).ready(function() {
     });
 
     // Get total price when selecting accompaniments and drinks
-    $('#accompanimentDropdown, #drinksDropdown').on('change', function(){
+    $('#accompanimentDropdown, #drinksDropdown, #accompanimentDropdownDuo, #drinksDropdownDuo').on('change', function(){
         var $this = $(this),
             thisId = $this.attr('id'),
             dropVal = $this.find(":selected").text(),

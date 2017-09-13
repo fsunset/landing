@@ -41,7 +41,7 @@
             {% for featuredItem in featuredItems %}
                 <div class="{% if loop.first %}col-sm-offset-1 {% endif %}col-sm-3 img-container">
                     <img class="combo" src="{{ asset('bundles/app/img/home/featured' ~ loop.index ~ '.jpg') }}" alt="{{ featuredItem.name|title }} ">
-                    <img class="shopping-car" data-id="{{ featuredItem.id }}" data-title="{{ featuredItem.name|title }}" data-toggle="modal" data-target="#shoppingModal" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                    <img class="shopping-car" data-showSelections="{{ featuredItem.showSelections == true ? 'yes' : 'no' }}" data-isDuo="{{ featuredItem.isDuo == true ? 'yes' : 'no'  }}" data-id="{{ featuredItem.id }}" data-title="{{ featuredItem.name|title }}" data-toggle="modal" data-target="#shoppingModal" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
                 </div>
             {% endfor %}
         </div>
@@ -99,7 +99,7 @@
                                                         {{ item.comboPrice|price }}
                                                     {% endif %}
                                                 </div>
-                                                <img class="shopping-car" data-id="{{ item.id }}" data-title="{{ item.name|title }}" data-toggle="modal" data-target="#shoppingModal" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
+                                                <img class="shopping-car" data-show-selections="{{ item.showSelections == true ? 'yes' : 'no' }}" data-is-duo="{{ item.isDuo == true ? 'yes' : 'no'  }}" data-id="{{ item.id }}" data-title="{{ item.name|title }}" data-toggle="modal" data-target="#shoppingModal" src="{{ asset('bundles/app/img/home/shopping-car.png') }}" alt="Car">
                                             </div>
                                             {% if loop.index is divisible by(3) and not loop.last %}
                                                 </div> {# /.row #}

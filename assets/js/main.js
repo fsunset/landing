@@ -189,6 +189,7 @@ $(document).ready(function() {
         $contactForm = $('#contactForm'),
         $order = [],
         index,
+        isDuo = 'no',
         totalPriceOrderGlobal = 0,
         totalOrderPrice = 0,
         $orderDetails = $('#orderDetails'),
@@ -229,6 +230,8 @@ $(document).ready(function() {
             $additionContainer = $('#additionContainer'),
             $toggleSelections = $('.selections'),
             $togglecomboDuo = $('.combo-duo'),
+            accompanimentDuo,
+            drinkDuo,
 
             // For Combo Duo Only!
             $drinksDropdownDuo = $('#drinksDropdownDuo'),
@@ -375,19 +378,30 @@ $(document).ready(function() {
 
     // Order Proccess
     $(document).on('click', '#confirmOrderModal', function(e) {
-        var totalPriceOrder = $('#totalPrice').text();
+        var totalPriceOrder = $('#totalPrice').text(),
+            thisTitle = $('#shoppingModalLabel').text();;
 
         // Remove all but numbers from total
         totalPriceOrder = totalPriceOrder.replace(/[^0-9]/g, '');
 
         totalPriceOrderGlobal = parseInt(totalPriceOrderGlobal) + parseInt(totalPriceOrder);
 
+        if (thisTitle.search(/duo/i) != -1) {
+            accompanimentDuo = $('#accompanimentDropdownDuo option:selected').text();
+            drinkDuo = $('#drinksDropdownDuo option:selected').text();
+        } else {
+            accompanimentDuo = null;
+            drinkDuo = null;
+        }
+
         $order.push({
             'id': $('#shoppingModalLabel').attr('item-id'),
-            'title': $('#shoppingModalLabel').text(),
+            'title': thisTitle,
             'description': $('#shoppingModalDesc').text(),
             'accompaniment': $('#accompanimentDropdown option:selected').text(),
+            'accompanimentDuo': accompanimentDuo,
             'drink': $('#drinksDropdown option:selected').text(),
+            'drinkDuo': drinkDuo,
             'additions': $('.additionsItem:checkbox:checked'),
             'totalPrice': totalPriceOrder
         });
@@ -395,7 +409,9 @@ $(document).ready(function() {
         $orderDetails.html('');
 
         $.each($order, function(key, itemOfOrder) {
-            var additionsText = '';
+            var additionsText = '',
+                accompHtmlDuo = '',
+                drinkHtmlDuo = '';
 
             $.each(itemOfOrder.additions, function(key, addition) {
                 additionsText += $(addition).data('text') + ', ';
@@ -407,7 +423,14 @@ $(document).ready(function() {
                 additionsText = additionsText.replace(/,([^,]*)$/,'$1');
             }
 
-            $orderDetails.append('<div class="order-item clearfix"><button type="button" class="close delete-from-order" id="deleteFromOrder_' + itemOfOrder.id + '_' + itemOfOrder.totalPrice + '_' + key + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><h3>' + itemOfOrder.title + ' x <input type="number" id="numberItems_' + itemOfOrder.id + '" class="numberItems" data-price="' + itemOfOrder.totalPrice + '" value="1" min="1" max="20"></h3><span class="float-right total-order">Total: ' + accounting.formatMoney(itemOfOrder.totalPrice, "$", 0, ".", ",") + '</span><span>' + itemOfOrder.description + '</span><span>Bebida: ' + itemOfOrder.drink + '</span><span>Acompañamiento: ' + itemOfOrder.accompaniment + '</span><span>Adiciones: ' + additionsText + '</span></div>');
+            if (itemOfOrder.accompanimentDuo != null) {
+                accompHtmlDuo = '<span>Acompañamiento 2: ' + itemOfOrder.accompanimentDuo + '</span>';
+            }
+            if (itemOfOrder.drinkDuo != null) {
+                drinkHtmlDuo = '<span>Bebida 2: ' + itemOfOrder.drinkDuo + '</span>';
+            }
+
+            $orderDetails.append('<div class="order-item clearfix"><button type="button" class="close delete-from-order" id="deleteFromOrder_' + itemOfOrder.id + '_' + itemOfOrder.totalPrice + '_' + key + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><h3>' + itemOfOrder.title + ' x <input type="number" id="numberItems_' + itemOfOrder.id + '" class="numberItems" data-price="' + itemOfOrder.totalPrice + '" value="1" min="1" max="20"></h3><span class="float-right total-order">Total: ' + accounting.formatMoney(itemOfOrder.totalPrice, "$", 0, ".", ",") + '</span><span>' + itemOfOrder.description + '</span><span>Bebida: ' + itemOfOrder.drink + '</span>' + drinkHtmlDuo + '<span>Acompañamiento: ' + itemOfOrder.accompaniment + '</span>' + accompHtmlDuo + '<span>Adiciones: ' + additionsText + '</span></div>');
         });
 
         totalOrderPrice = totalPriceOrderGlobal + orderPrice;

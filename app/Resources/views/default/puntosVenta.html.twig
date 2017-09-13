@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="row marketing">
+        <div class="row marketing inherit-container">
             <div class="title text-center">
                 <span class="white-dot"></span>
                 <span class="white-dot"></span>
@@ -37,6 +37,7 @@
                             <div class="col-sm-6">
                                 <h3 style="margin-top: 2%;">{{ branch.name|title }}</h3>
                                 <p style="font-size: .85em;">{{ branch.address }}</p>
+                                <p style="font-size: .85em;">{{ branch.phone }}</p>
                                 {# <p>{{ branch.phone }}</p> #}
                                 <p style="font-size: .85em;">Horarios de atención:<br>{{ branch.hours|nl2br }}</p>
                             </div>

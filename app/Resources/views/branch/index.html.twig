@@ -24,7 +24,7 @@
                     <tr>
                         <td><a href="{{ path('branch_show', { 'id': branch.id }) }}">{{ branch.id }}</a></td>
                         <td>{{ branch.name }}</td>
-                        <td>{{ branch.hours }}</td>
+                        <td>{{ branch.hours|nl2br }}</td>
                         <td>{{ branch.address }}</td>
                         <td>{{ branch.phone }}</td>
                         <td>

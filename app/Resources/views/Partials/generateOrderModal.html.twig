@@ -29,10 +29,11 @@
                             <select name="payment-method" id="paymentMethod" style="width:100%;">
                                 <option value="efectivo">Efectivo</option>
                                 <option value="datafono">Datafono</option>
+                                <option value="bonos">Bonos, excepto Ticket Prom</option>
                             </select>
                             <div class="">
                                 <input type="checkbox" name="termsCheckbox" id="termsCheckbox">
-                                <small>He leido y estoy de acuerdo con los terminos y condiciones, y con las politicas y tratamientos de datos personales</small>
+                                <small>He leido y estoy de acuerdo con los <a target="_blank" href="{{ path('terms') }}">terminos y condiciones</a>, y con las politicas y tratamientos de datos personales</small>
                                 <div style="font-size: .8em;" class="alert alert-danger hide" id="error-terms">debes aceptar términos y condiciones</div>
                             </div>
                         </div>

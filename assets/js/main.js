@@ -182,7 +182,6 @@ $(document).ready(function() {
     $('.dataTable').DataTable();
 
     var $itemsContainer = $('#appbundle_drink_items, #appbundle_accompaniment_items, #appbundle_addition_items'),
-        $numberItems = $('#numberItems'),
         $totalPrice = $('#totalPrice'),
         totalPrice = '',
         currentTotalPrice = '',
@@ -193,7 +192,11 @@ $(document).ready(function() {
         totalPriceOrderGlobal = 0,
         totalOrderPrice = 0,
         $orderDetails = $('#orderDetails'),
-        orderPrice = 3900;
+        orderPrice = 3900,
+        firstDrinkPrice = 0,
+        firstAccompanimentPrice = 0,
+        currentDropdownPrice = 0,
+        thisItemTotal = 0;
 
     // Select all checkbox
     $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
@@ -224,8 +227,6 @@ $(document).ready(function() {
             $additionContainer = $('#additionContainer'),
             $toHide = $('.to-hide');
 
-        $numberItems.val(1);
-
         if (id == '50') {
             $toHide.hide();
         } else {
@@ -244,12 +245,15 @@ $(document).ready(function() {
                 $drinksDropdown.html(data.itemDrinks);
                 $accompanimentDropdown.html(data.itemAccompaniments);
                 $additionContainer.html(data.itemAdditions);
-
                 $shoppingModalDesc.html(data.description);
+
+                firstDrinkPrice = parseInt(data.firstDrinkPrice);
+                firstAccompanimentPrice = parseInt(data.firstAccompanimentPrice);
+
                 if (data.unitaryPrice > 0 ) {
-                    totalPrice = data.unitaryPrice;
+                    totalPrice = data.unitaryPrice + firstDrinkPrice + firstAccompanimentPrice;
                 } else {
-                    totalPrice = data.comboPrice;
+                    totalPrice = data.comboPrice + firstDrinkPrice + firstAccompanimentPrice;
                 }
                 currentTotalPrice = totalPrice = parseInt(totalPrice);
                 $totalPrice.text('total: ' + accounting.formatMoney(totalPrice, "$", 0, ".", ","));
@@ -261,22 +265,69 @@ $(document).ready(function() {
     });
 
     // Get total price when changing number of items
-    $numberItems.on('change paste', function(){
+    $(document).on('change paste', '.numberItems', function(){
         var $this = $(this),
-            itemNumberVal = $this.val();
+            itemNumberVal = $this.val(),
+            $thisClosestTotalObj = $this.parent().siblings('span.total-order'),
+            thisItemTotal = $this.data('price'),
+            $allItemsPrices,
+            allItemsPricesVal = 0,
+            thisItemTotalNew = 0,
+            $buttonUpdate = $this.parent().siblings('.delete-from-order'),
+            buttonUpdateId = $buttonUpdate.attr('id'),
+            $buttonUpdateIdArray = buttonUpdateId.split('_');
 
-        if (itemNumberVal == 0 || itemNumberVal > 20 || itemNumberVal < 1) {
+        if (itemNumberVal === 0 || itemNumberVal > 20 || itemNumberVal < 1) {
             $this.val(1);
             itemNumberVal = 1;
         }
 
         if (itemNumberVal == 1) {
-            currentTotalPrice = parseInt(totalPrice);
+            thisItemTotalNew = parseInt(thisItemTotal);
         } else {
-            currentTotalPrice = parseInt(currentTotalPrice) * parseInt(itemNumberVal);
+            thisItemTotalNew = parseInt(thisItemTotal) * parseInt(itemNumberVal);
         }
 
-        $totalPrice.text('Total: ' + accounting.formatMoney(currentTotalPrice, "$", 0, ".", ","));
+        $thisClosestTotalObj.text('Total: ' + accounting.formatMoney(thisItemTotalNew, "$", 0, ".", ","));
+
+        $allItemsPrices = $this.parents('#orderDetails').find('span.total-order');
+
+        $.each($allItemsPrices, function(key, ele) {
+            allItemsPricesVal += parseInt((($(ele).text().split('$'))[1]).replace('.', ''));
+        });
+
+        totalPriceOrderGlobal = allItemsPricesVal;
+
+        $('#totalOrderGlobal').text('Total Pedido: ' + accounting.formatMoney(allItemsPricesVal, "$", 0, ".", ","));
+
+        totalOrderPriceNew = allItemsPricesVal + orderPrice;
+
+        $('#totalOrderPrice').text('total a pagar: ' + accounting.formatMoney(totalOrderPriceNew, "$", 0, ".", ","));
+
+        // Update ID like --> deleteFromOrder_3_19900_1
+        $buttonUpdate.attr('id', 'deleteFromOrder_' + $buttonUpdateIdArray[1] + '_' + thisItemTotalNew + '_' + $buttonUpdateIdArray[3]);
+    });
+
+    // Get current accompaniments/drinks price when clicking dropdowns
+    $('#accompanimentDropdown, #drinksDropdown').on('click', function(){
+        var $this = $(this),
+            myCurrentText = $this.find(":selected").text(),
+            myCurrentValArray = myCurrentText.split('+ ');
+
+            currentDropdownPrice = parseInt(myCurrentValArray[1]);
+    });
+
+    // Get total price when selecting accompaniments and drinks
+    $('#accompanimentDropdown, #drinksDropdown').on('change', function(){
+        var $this = $(this),
+            thisId = $this.attr('id'),
+            dropVal = $this.find(":selected").text(),
+            selectedValueArray = dropVal.split('+ '),
+            selectedValue = parseInt(selectedValueArray[1]);
+
+            currentTotalPrice = parseInt(currentTotalPrice) - parseInt(currentDropdownPrice) + selectedValue;
+
+            $totalPrice.text('Total: ' + accounting.formatMoney(currentTotalPrice, "$", 0, ".", ","));
     });
 
     // Get total price when selecting additions
@@ -308,7 +359,6 @@ $(document).ready(function() {
             'id': $('#shoppingModalLabel').attr('item-id'),
             'title': $('#shoppingModalLabel').text(),
             'description': $('#shoppingModalDesc').text(),
-            'numberOfItems': $('#numberItems').val(),
             'accompaniment': $('#accompanimentDropdown option:selected').text(),
             'drink': $('#drinksDropdown option:selected').text(),
             'additions': $('.additionsItem:checkbox:checked'),
@@ -330,7 +380,7 @@ $(document).ready(function() {
                 additionsText = additionsText.replace(/,([^,]*)$/,'$1');
             }
 
-            $orderDetails.append('<div class="order-item clearfix"><button type="button" class="close delete-from-order" id="deleteFromOrder_' + itemOfOrder.id + '_' + itemOfOrder.totalPrice + '_' + key + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><h3>' + itemOfOrder.title + ' x ' + itemOfOrder.numberOfItems + '</h3><span class="float-right total-order">Total: ' + accounting.formatMoney(itemOfOrder.totalPrice, "$", 0, ".", ",") + '</span><span>' + itemOfOrder.description + '</span><span>Bebida: ' + itemOfOrder.drink + '</span><span>Acompañamiento: ' + itemOfOrder.accompaniment + '</span><span>Adiciones: ' + additionsText + '</span></div>');
+            $orderDetails.append('<div class="order-item clearfix"><button type="button" class="close delete-from-order" id="deleteFromOrder_' + itemOfOrder.id + '_' + itemOfOrder.totalPrice + '_' + key + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><h3>' + itemOfOrder.title + ' x <input type="number" id="numberItems_' + itemOfOrder.id + '" class="numberItems" data-price="' + itemOfOrder.totalPrice + '" value="1" min="1" max="20"></h3><span class="float-right total-order">Total: ' + accounting.formatMoney(itemOfOrder.totalPrice, "$", 0, ".", ",") + '</span><span>' + itemOfOrder.description + '</span><span>Bebida: ' + itemOfOrder.drink + '</span><span>Acompañamiento: ' + itemOfOrder.accompaniment + '</span><span>Adiciones: ' + additionsText + '</span></div>');
         });
 
         totalOrderPrice = totalPriceOrderGlobal + orderPrice;
@@ -349,8 +399,8 @@ $(document).ready(function() {
         var $orderInfoDetails = $('#order-info-details'),
             htmlString = $orderDetails.html();
 
-        $(htmlString).find('button').addClass('hide');
         $orderInfoDetails.html(htmlString);
+        $orderInfoDetails.find('.numberItems').attr('disabled', 'disabled');
     });
 
     // Finish order proccess

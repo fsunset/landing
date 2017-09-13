@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row title-container clearfix">
+            <h1 class="pull-left">Textos Legales ({{ legals|length }} total)</h1>
+            <a href="{{ path('legal_new') }}" class="btn btn-primary">Nuevo Texto Legal</a>
+        </div>
+
+        <div class="row container list-container">
+            <table id="legalTable" class="display dataTable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titulo</th>
+                        <th>Contenido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for legal in legals %}
+                    <tr>
+                        <td><a href="{{ path('legal_show', { 'id': legal.id }) }}">{{ legal.id }}</a></td>
+                        <td>{{ legal.title }}</td>
+                        <td>{{ legal.content|nl2br }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('legal_show', { 'id': legal.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('legal_edit', { 'id': legal.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

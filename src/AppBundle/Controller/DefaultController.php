@@ -42,7 +42,7 @@ class DefaultController extends Controller
         $itemDrinks = null;
         foreach ($drinks as $drink) {
             if (is_int(array_search($id, $drink->getItems()))) {
-                $itemDrinks .= '<option value="' . $drink->getId() . '">' . ucwords($drink->getName()) . '</option>';
+                $itemDrinks .= '<option value="' . $drink->getId() . '">' . ucwords($drink->getName()) . ' + ' . $drink->getUnitaryPrice() . '</option>';
             }
         }
 
@@ -52,7 +52,7 @@ class DefaultController extends Controller
         $itemAccompaniments = null;
         foreach ($accompaniments as $accompaniment) {
             if (is_int(array_search($id, $accompaniment->getItems()))) {
-                $itemAccompaniments .= '<option value="' . $accompaniment->getId() . '">' . ucwords($accompaniment->getName()) . '</option>';
+                $itemAccompaniments .= '<option value="' . $accompaniment->getId() . '">' . ucwords($accompaniment->getName()) . ' + ' . $accompaniment->getUnitaryPrice() . '</option>';
             }
         }
 
@@ -72,7 +72,9 @@ class DefaultController extends Controller
                 'unitaryPrice' => $item->getUnitaryPrice(),
                 'comboPrice' => $item->getComboPrice(),
                 'itemDrinks' => $itemDrinks,
+                'firstDrinkPrice' => $drinks[0]->getUnitaryPrice(),
                 'itemAccompaniments' => $itemAccompaniments,
+                'firstAccompanimentPrice' => $accompaniments[0]->getUnitaryPrice(),
                 'itemAdditions' => $itemAdditions
             )
         );
@@ -107,6 +109,48 @@ class DefaultController extends Controller
     public function contactoAction(Request $request)
     {
         return $this->render('default/contacto.html.twig');
+    }
+
+    /**
+     * @Route("/terminos-y-condiciones", name="terms")
+     */
+    public function terminosAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $terms = $em->getRepository('AppBundle:Legal')->findById(1);
+
+        return $this->render('default/terminos.html.twig', array(
+            'terms' => $terms
+        ));
+    }
+
+    /**
+     * @Route("/politica-privacidad", name="policy")
+     */
+    public function politicaAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $policy = $em->getRepository('AppBundle:Legal')->findById(2);
+
+        return $this->render('default/politica.html.twig', array(
+            'policy' => $policy
+        ));
+    }
+
+    /**
+     * @Route("/preguntas-frecuentes", name="faq")
+     */
+    public function faqAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $faq = $em->getRepository('AppBundle:Legal')->findById(3);
+
+        return $this->render('default/faq.html.twig', array(
+            'faq' => $faq
+        ));
     }
 
 

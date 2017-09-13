@@ -57,14 +57,14 @@
                     <div class="col-xs-3">
                         <h4>Legal</h4>
                         <ul>
-                            <li><a href="">Preguntas frecuentes</a></li>
-                            <li><a href=""></a>Politica de privacidad</li>
-                            <li><a href=""></a>Condiciones de uso</li>
+                            <li><a href="{{ path('faq') }}">Preguntas frecuentes</a></li>
+                            <li><a href="{{ path('policy') }}">Politica de privacidad</a></li>
+                            <li><a href="{{ path('terms') }}">Condiciones de uso</a></li>
                         </ul>
                     </div>
                     <div class="col-xs-3">
                         <ul class="copyright">
-                            <li><a href=""></a>Condiciones y restricciones</li>
+                            <li>Condiciones y restricciones</li>
                             <li>
                                 <strong>del rodeo colombia</strong> &copy; {{ "now"|date("Y") }}
                             </li>
@@ -76,6 +76,17 @@
 
         <script src="//rawgit.com/openexchangerates/accounting.js/master/accounting.min.js"></script>
         <script src="{{ asset('build/app.js') }}"></script>
+
+        {# Google Analytics #}
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-106289099-1', 'auto');
+            ga('send', 'pageview');
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

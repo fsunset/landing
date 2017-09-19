@@ -534,10 +534,12 @@ body {
                 background-repeat: no-repeat;
                 background-position: bottom;
                 background-size: contain;
+                overflow: hidden;
 
                 img {
                     width: 60%;
                     margin-left: 20%;
+                    margin-top: 5%;
                 }
             }
         }
@@ -565,8 +567,8 @@ body {
             .order-price,
             .total-order-price { margin-left: 5%; }
 
-            .to-remove button {
-                display: none;
+            .to-remove {
+                button { display: none; }
             }
         }
 

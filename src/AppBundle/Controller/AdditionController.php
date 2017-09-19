@@ -45,7 +45,7 @@ class AdditionController extends Controller
             ->getRepository('AppBundle:Item')
             ->createQueryBuilder('i')
             ->where('i.isActive = true')
-            ->andWhere('i.isFeatured = false')
+            // ->andWhere('i.isFeatured = false')
             ->orderBy('i.name', 'ASC')
             ->getQuery();
         $result = $query->getResult(Query::HYDRATE_ARRAY);
@@ -101,7 +101,7 @@ class AdditionController extends Controller
             ->getRepository('AppBundle:Item')
             ->createQueryBuilder('i')
             ->where('i.isActive = true')
-            ->andWhere('i.isFeatured = false')
+            // ->andWhere('i.isFeatured = false')
             ->orderBy('i.name', 'ASC')
             ->getQuery();
         $result = $query->getResult(Query::HYDRATE_ARRAY);

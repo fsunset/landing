@@ -25,6 +25,9 @@ class ItemType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'label_format' => 'Descripcion',
             ))
+            ->add('image', null, array(
+                'label_format' => 'Foto',
+            ))
             ->add('unitaryPrice', null, array(
                 'label_format' => 'Precio Unitario',
             ))

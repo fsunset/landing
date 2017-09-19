@@ -44,6 +44,13 @@ class Item
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=100)
+     */
+    private $image;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Section", inversedBy="items")
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
      */
@@ -189,6 +196,30 @@ class Item
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Item
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**

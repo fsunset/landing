@@ -220,6 +220,7 @@ $(document).ready(function() {
     $('#shoppingModal').on('show.bs.modal', function(e) {
         var $button = $(e.relatedTarget),
             title = $button.data('title'),
+            image = $button.data('image') == '' ? 'menu.jpg' : $button.data('image'),
             id = $button.data('id'),
             showSelections = $button.data('show-selections'),
             isDuo = $button.data('is-duo'),
@@ -232,6 +233,7 @@ $(document).ready(function() {
             $togglecomboDuo = $('.combo-duo'),
             accompanimentDuo,
             drinkDuo,
+            path,
 
             // For Combo Duo Only!
             $drinksDropdownDuo = $('#drinksDropdownDuo'),
@@ -251,6 +253,9 @@ $(document).ready(function() {
         } else {
             $togglecomboDuo.show();
         }
+
+         path = $shoppingModal.find('.modal-header').data('path');
+         $shoppingModal.find('.modal-header').html('<img src="' + path + image + '" alt="image">');
 
         $shoppingModal.find('.modal-title').text(title);
         $shoppingModal.find('.modal-title').attr('item-id', id);
@@ -447,8 +452,17 @@ $(document).ready(function() {
     // Populate modal for finish order process -send order by email-
     $(document).on('click', '#confirmOrder', function(){
         var $orderInfoDetails = $('#order-info-details'),
-            htmlString = $orderDetails.html();
+            htmlString = $orderDetails.html(),
+            thisValArray = [];
 
+            // Get vals for quantity inputs
+        $.each($orderDetails.find('.numberItems'), function(key, ele) {
+            var $this = $(this),
+                thisVal = $this.val();
+
+                thisValArray.push(thisVal);
+        });
+console.log(thisValArray);
         $orderInfoDetails.html(htmlString);
         $orderInfoDetails.find('.numberItems').attr('disabled', 'disabled');
     });

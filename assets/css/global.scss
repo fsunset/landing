@@ -209,6 +209,11 @@ body {
                 &.combo {
                     width: 100%;
                     margin-bottom: 10px;
+
+                    &.menu-list {
+                        height: 112px;
+                        width: auto;
+                    }
                 }
 
                 &.shopping-car {
@@ -535,12 +540,9 @@ body {
                 background-position: bottom;
                 background-size: contain;
                 overflow: hidden;
+                text-align: center;
 
-                img {
-                    width: 60%;
-                    margin-left: 20%;
-                    margin-top: 5%;
-                }
+                img { height: 100%; }
             }
         }
 

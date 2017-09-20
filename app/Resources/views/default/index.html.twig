@@ -91,7 +91,7 @@
                                 <div class="row marketing">
                                     <div class="row">
                                         {% for item in section.id|menuItem %}
-                                            <div class="{% if loop.first or loop.index == 4 or loop.index == 7 or loop.index == 10 %}col-sm-offset-1 {% endif %} col-sm-3 img-container-shadow">
+                                            <div class="text-center {% if loop.first or loop.index == 4 or loop.index == 7 or loop.index == 10 %}col-sm-offset-1 {% endif %} col-sm-3 img-container-shadow">
                                                 <div class="item-name text-center">
                                                     <h3>{{ item.name|lower }}</h3>
                                                 </div>
@@ -100,7 +100,7 @@
                                                 {% else %}
                                                     {% set image = item.image %}
                                                 {% endif %}
-                                                <img class="combo" src="{{ asset('bundles/app/img/home/menu/' ~ image ) }}" alt="{{item.name|lower}}">
+                                                <img class="combo menu-list" src="{{ asset('bundles/app/img/home/menu/' ~ image ) }}" alt="{{item.name|lower}}">
                                                 <div class="item-description-price text-center">
                                                     <p>{{ item.description|lower }}</p>
                                                     {% if item.unitaryPrice > 0 %}

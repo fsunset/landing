@@ -1,0 +1,32 @@
+<img src="http://ccpalatino.com/wp-content/uploads/2017/01/del-rodeo-logo-v2.jpg">
+
+<h4>Hola {{ name|title }},</h4>
+
+<p>Tu pedido con las siguientes características ha sido confirmado, ¡pronto lo recibirás!</p>
+
+<p>
+    {{orderInformation|raw}}
+</p>
+
+<p>
+    <ul>
+        <li>
+            Direccion de entrega: {{address}}{% if addressTwo != '' %}, {{addressTwo}}{% endif %}
+
+        </li>
+        <li>Metodo de pago: {{paymentMethodValue|title}}</li>
+        {% if messageContent != '' %}
+            <li>
+                Comentarios de tu pedido:
+                <p>{{messageContent|nl2br}}</p>
+            </li>
+        {% endif %}
+    </ul>
+</p>
+
+<br>
+<strong>
+    ¡Gracias por tu orden!
+    <br><br>
+    - Equipo Del Rodeo :)
+</strong>

@@ -1,0 +1,36 @@
+<img src="http://ccpalatino.com/wp-content/uploads/2017/01/del-rodeo-logo-v2.jpg">
+
+<h4>Un nuevo pedido ha sido confirmado</h4>
+
+<p>
+    {{name|title}} ha generado un nuevo pedido con las siguientes caracteristicas:
+</p>
+
+<p>
+    {{orderInformation|raw}}
+</p>
+
+<p>
+    <ul>
+        <li>
+            Teléfono de contacto: {{phone}}
+        </li>
+        <li>
+            Email de contacto: {{email}}
+        </li>
+        <li>
+            Direccion de entrega: {{address}}{% if addressTwo != '' %}, {{addressTwo}}{% endif %}
+
+        </li>
+        <li>
+            ¿Facturar a empresa?: {{companyBill}}
+        </li>
+        <li>Metodo de pago: {{paymentMethodValue|title}}</li>
+        {% if messageContent != '' %}
+            <li>
+                Comentarios adicionales:
+                <p>{{messageContent|nl2br}}</p>
+            </li>
+        {% endif %}
+    </ul>
+</p>

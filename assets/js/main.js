@@ -199,6 +199,11 @@ $(document).ready(function() {
         currentDropdownPrice = 0,
         thisItemTotal = 0;
 
+    // Clear Flash messages
+    setTimeout(function() {
+        $('.alert-success, alert-error').fadeOut('fast');
+    }, 5000);
+
     // Select all checkbox
     $itemsContainer.prepend('<input type="checkbox" name="selectAll" id="selectAll"> Todos<br><br>');
 
@@ -462,7 +467,7 @@ $(document).ready(function() {
 
                 thisValArray.push(thisVal);
         });
-console.log(thisValArray);
+
         $orderInfoDetails.html(htmlString);
         $orderInfoDetails.find('.numberItems').attr('disabled', 'disabled');
     });
@@ -473,7 +478,11 @@ console.log(thisValArray);
                 return !this.value;
             }),
             $checkedTerms = $('#termsCheckbox:checkbox:checked').length,
-            $formInputs = $('#orderInfoForm input');
+            $formInputs = $('#orderInfoForm input'),
+            $orderInfo = $('#order-info-details').html();
+
+        $('#paymentMethodValue').val($('#paymentMethod').val());
+        $('#orderInformation').val($orderInfo);
 
         if ($validation.length != 0) {
             $validation.addClass('error');

@@ -16,7 +16,17 @@
     </head>
     <body>
         <div class="container">
-            <img class="domi" src="{{ asset('bundles/app/img/global/domicilio.png') }}" alt="domicilios">
+            <div class="row">
+                <img class="domi" src="{{ asset('bundles/app/img/global/domicilio.png') }}" alt="domicilios">
+            </div>
+
+            {% for label, messages in app.flashes(['success', 'error']) %}
+                {% for message in messages %}
+                    <div class="alert text-center alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         </div>
         {% block body %}{% endblock %}
 

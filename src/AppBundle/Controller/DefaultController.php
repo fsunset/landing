@@ -155,24 +155,94 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/emailOrder", name="email_order")
+     */
+    public function emailOrderAction(Request $request)
+    {
+        $info = $request->request->all();
+        $delRodeoEmail = 'delrodeotest@gmail.com';
+        $name = $info['name'];
+        $email = $info['email'];
+        $address = $info['address'];
+        $addressTwo = $info['addressTwo'];
+        $phone = $info['phone'];
+        $companyBill = 'No';
+        if (isset($info['companyBill'])) {
+            $companyBill = 'Si';
+        }
+        $messageContent = $info['messageContent'];
+        $paymentMethodValue = $info['paymentMethodValue'];
+        $orderInformation = $info['orderInformation'];
+
+        $message = (new \Swift_Message('Nuevo Pedido Email'))
+            ->setSubject('Hamburguesas Del Rodeo | Nuevo pedido confirmado')
+            ->setFrom($email)
+            ->setTo($delRodeoEmail)
+            ->setBody(
+                $this->renderView(
+                    'Emails/order.html.twig', array(
+                        'name' => $name,
+                        'email' => $email,
+                        'address' => $address,
+                        'addressTwo' => $addressTwo,
+                        'phone' => $phone,
+                        'companyBill' => $companyBill,
+                        'messageContent' => $messageContent,
+                        'paymentMethodValue' => $paymentMethodValue,
+                        'orderInformation' => $orderInformation
+                        )
+                ),
+                'text/html'
+            )
+        ;
+
+        $messageCustomer = (new \Swift_Message('Nuevo Pedido Email'))
+            ->setSubject('Hamburguesas Del Rodeo | Tu pedido ha sido confirmado')
+            ->setFrom($email)
+            ->setTo($delRodeoEmail)
+            ->setBody(
+                $this->renderView(
+                    'Emails/orderCustomer.html.twig', array(
+                        'name' => $name,
+                        'address' => $address,
+                        'addressTwo' => $addressTwo,
+                        'messageContent' => $messageContent,
+                        'paymentMethodValue' => $paymentMethodValue,
+                        'orderInformation' => $orderInformation
+                        )
+                ),
+                'text/html'
+            )
+        ;
+
+        if ($this->get('mailer')->send($message) && $this->get('mailer')->send($messageCustomer)) {
+            $this->addFlash("success", "¡Tu pedido ha sido generado!", 4000);
+        } else {
+            $this->addFlash("error", "Tu pedido no ha podido ser generado, vuelve a intentarlo en unos momentos por favor");
+        }
+
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * @Route("/emailContact", name="email_contact")
      */
     public function emailAction(Request $request)
     {
-        $delRodeoEmail = 'francisco.sarmiento@scalablepath.com';
+        $delRodeoEmail = 'delrodeotest@gmail.com';
         $name = $request->request->get('name');
         $phone = $request->request->get('phone');
         $email = $request->request->get('email');
         $subject = $request->request->get('subject');
         $messageContent = $request->request->get('messageContent');
 
-        $message = (new \Swift_Message('Hello Email'))
-            ->setSubject('Contacto Sitio Web Del Rodeo - ' . $subject)
+        $message = (new \Swift_Message('Nuevo Mensaje Email'))
+            ->setSubject('Del Rodeo Web | Nuevo Mensaje - ' . $subject)
             ->setFrom($email)
             ->setTo($delRodeoEmail)
             ->setBody(
                 $this->renderView(
-                    'Emails/registration.html.twig', array(
+                    'Emails/contact.html.twig', array(
                         'name' => $name,
                         'phone' => $phone,
                         'messageContent' => $messageContent,

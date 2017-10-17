@@ -233,6 +233,8 @@ $(document).ready(function() {
             $shoppingModalDesc = $('#shoppingModalDesc'),
             $drinksDropdown = $('#drinksDropdown'),
             $accompanimentDropdown = $('#accompanimentDropdown'),
+            $drinksDropdownContainer = $('#drinksDropdownContainer'),
+            $accompanimentDropdownContainer = $('#accompanimentDropdownContainer'),
             $additionContainer = $('#additionContainer'),
             $toggleSelections = $('.selections'),
             $togglecomboDuo = $('.combo-duo'),
@@ -271,8 +273,16 @@ $(document).ready(function() {
             data: {'id': id},
             type: 'json',
             success: function(data) {
-                $drinksDropdown.html(data.itemDrinks);
-                $accompanimentDropdown.html(data.itemAccompaniments);
+                if (data.itemDrinks != null) {
+                    $drinksDropdown.html(data.itemDrinks);
+                    $drinksDropdownContainer.removeClass('hide');
+                }
+
+                if (data.itemAccompaniments != null) {
+                    $accompanimentDropdown.html(data.itemAccompaniments);
+                    $accompanimentDropdownContainer.removeClass('hide');
+                }
+
                 $additionContainer.html(data.itemAdditions);
 
                 // For Combo Duo Only!

@@ -1,9 +1,8 @@
 <div class="modal fade shopping-modal" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="shoppingModalLabel" data-url="{{ path('itemInfo') }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header" data-path="{{asset('bundles/app/img/home/menu/') }}">
+            <div class="modal-header" data-path="{{asset('bundles/app/img/home/menu/') }}"></div>
 
-            </div>
             <div class="modal-body" id="shoppingModalBody">
                 <h1 class="modal-title text-center" item-id="" id="shoppingModalLabel"></h1>
                 <p id="shoppingModalDesc" class="item-description-price"></p>
@@ -25,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="row adds selections">
+                <div id="additionsContainer" class="row adds selections hide">
                     <div class="col-xs-12">
                         <h3 style="margin-bottom: -10px;">Adiciones</h3>
                         <small>Selecciona cuantos quieras</small>

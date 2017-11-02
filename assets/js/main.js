@@ -236,6 +236,7 @@ $(document).ready(function() {
             $drinksDropdownContainer = $('#drinksDropdownContainer'),
             $accompanimentDropdownContainer = $('#accompanimentDropdownContainer'),
             $additionContainer = $('#additionContainer'),
+            $additionsContainer = $('#additionsContainer'),
             $toggleSelections = $('.selections'),
             $togglecomboDuo = $('.combo-duo'),
             accompanimentDuo,
@@ -276,14 +277,23 @@ $(document).ready(function() {
                 if (data.itemDrinks != null) {
                     $drinksDropdown.html(data.itemDrinks);
                     $drinksDropdownContainer.removeClass('hide');
+                } else {
+                    $drinksDropdownContainer.addClass('hide');
                 }
 
                 if (data.itemAccompaniments != null) {
                     $accompanimentDropdown.html(data.itemAccompaniments);
                     $accompanimentDropdownContainer.removeClass('hide');
+                } else {
+                    $accompanimentDropdownContainer.addClass('hide');
                 }
 
-                $additionContainer.html(data.itemAdditions);
+                if (data.itemAdditions != null) {
+                    $additionContainer.html(data.itemAdditions);
+                    $additionsContainer.removeClass('hide');
+                } else {
+                    $additionsContainer.addClass('hide');
+                }
 
                 // For Combo Duo Only!
                 $drinksDropdownDuo.html(data.itemDrinks);
@@ -306,6 +316,7 @@ $(document).ready(function() {
                     totalPrice = data.comboPrice + firstDrinkPrice + firstAccompanimentPrice;
                 }
                 currentTotalPrice = totalPrice = parseInt(totalPrice);
+
                 $totalPrice.text('total: ' + accounting.formatMoney(totalPrice, "$", 0, ".", ","));
             },
             error: function(error) {

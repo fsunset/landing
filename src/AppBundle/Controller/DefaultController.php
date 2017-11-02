@@ -72,9 +72,9 @@ class DefaultController extends Controller
                 'unitaryPrice' => $item->getUnitaryPrice(),
                 'comboPrice' => $item->getComboPrice(),
                 'itemDrinks' => $itemDrinks,
-                'firstDrinkPrice' => $drinks[0]->getUnitaryPrice(),
+                'firstDrinkPrice' => !is_null($itemDrinks) ? $drinks[0]->getUnitaryPrice() : 0,
                 'itemAccompaniments' => $itemAccompaniments,
-                'firstAccompanimentPrice' => $accompaniments[0]->getUnitaryPrice(),
+                'firstAccompanimentPrice' => !is_null($itemAccompaniments) ? $accompaniments[0]->getUnitaryPrice() : 0,
                 'itemAdditions' => $itemAdditions
             )
         );

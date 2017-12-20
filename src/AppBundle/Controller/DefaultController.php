@@ -160,7 +160,7 @@ class DefaultController extends Controller
     public function emailOrderAction(Request $request)
     {
         $info = $request->request->all();
-        $delRodeoEmail = 'delrodeotest@gmail.com';
+        $delRodeoEmail = 'domicilios@hamburguesasdelrodeo.com';
         $name = $info['name'];
         $email = $info['email'];
         $address = $info['address'];
@@ -198,8 +198,8 @@ class DefaultController extends Controller
 
         $messageCustomer = (new \Swift_Message('Nuevo Pedido Email'))
             ->setSubject('Hamburguesas Del Rodeo | Tu pedido ha sido confirmado')
-            ->setFrom($email)
-            ->setTo($delRodeoEmail)
+            ->setFrom($delRodeoEmail)
+            ->setTo($email)
             ->setBody(
                 $this->renderView(
                     'Emails/orderCustomer.html.twig', array(
@@ -229,7 +229,7 @@ class DefaultController extends Controller
      */
     public function emailAction(Request $request)
     {
-        $delRodeoEmail = 'delrodeotest@gmail.com';
+        $delRodeoEmail = 'domicilios@hamburguesasdelrodeo.com';
         $name = $request->request->get('name');
         $phone = $request->request->get('phone');
         $email = $request->request->get('email');
